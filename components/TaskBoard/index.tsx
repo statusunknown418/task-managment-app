@@ -1,6 +1,17 @@
 import { NextPage } from 'next';
-import { ContainerStyled } from './Container.styled';
+import { Flex } from '../Flex';
+import { ContainerStyled } from './TasksContainer.styled';
 
-export const TaskBoard: NextPage = () => {
-  return <ContainerStyled></ContainerStyled>;
+interface Props {
+  title: string;
+}
+
+export const TaskBoard: NextPage<Props> = ({ title }) => {
+  return (
+    <ContainerStyled>
+      <Flex>
+        <h2>{title}</h2>
+      </Flex>
+    </ContainerStyled>
+  );
 };

@@ -9,6 +9,8 @@ export interface SearchBoxProps extends SelectorProps {
   iconSize: string | number;
   absolutePosition?: boolean;
   bordered?: boolean;
+  offset?: number;
+  offsetY?: number;
 }
 export const SearchboxStyled = styled.input`
   width: 100%;
