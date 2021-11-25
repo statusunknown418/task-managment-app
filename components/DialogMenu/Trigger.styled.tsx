@@ -9,4 +9,6 @@ export const TriggerStyled = styled(PopoverTrigger)`
   &:hover {
     color: ${({ theme }: { theme: ThemeProperties }) => theme.mainText};
   }
+
+  transition: color 0.2s ease-in-out;
 `;

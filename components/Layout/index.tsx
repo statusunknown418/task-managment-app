@@ -8,7 +8,6 @@ export const Layout: NextPage = ({ children }) => {
   return (
     <>
       <Sidebar />
-
       <LayoutStyled>
         <SearchBox />
         <TaskNavbar />

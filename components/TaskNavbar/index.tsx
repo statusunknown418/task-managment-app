@@ -1,34 +1,31 @@
-import {
-  DashboardIcon,
-  HamburgerMenuIcon,
-  ListBulletIcon,
-} from '@radix-ui/react-icons';
+import { useQuery } from '@apollo/client';
+import { DashboardIcon, HamburgerMenuIcon } from '@radix-ui/react-icons';
 import { NextPage } from 'next';
+import { useRouter } from 'next/dist/client/router';
+import { IconStyled } from '../Searchbox/IconSidebar.styled';
 import { TaskNavbarStyled } from './TaskNavbar.styled';
 
-interface Props {}
+export const TaskNavbar: NextPage = () => {
+  const router = useRouter();
 
-export const TaskNavbar: NextPage<Props> = () => {
   return (
     <TaskNavbarStyled>
-      <div style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
-        <div>
-          <HamburgerMenuIcon height={20} width={20} />
-        </div>
+      <IconStyled
+        iconSize={40}
+        currentRoute={router.pathname}
+        routeName="/my-tasks"
+      >
+        <HamburgerMenuIcon height={20} width={20} />
+      </IconStyled>
 
-        <div
-          style={{
-            border: '1px solid #DA584B',
-            width: '40px',
-            height: '40px',
-            padding: '10px',
-            borderRadius: '8px',
-            color: '#DA584B',
-          }}
-        >
-          <DashboardIcon height={18} width={18} />
-        </div>
-      </div>
+      <IconStyled
+        iconSize={40}
+        bordered
+        currentRoute={router.pathname}
+        routeName="/"
+      >
+        <DashboardIcon height={20} width={20} />
+      </IconStyled>
     </TaskNavbarStyled>
   );
 };

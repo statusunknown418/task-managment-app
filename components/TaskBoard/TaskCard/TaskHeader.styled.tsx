@@ -1,8 +1,7 @@
 import styled from 'styled-components';
 
-export const TaskNavbarStyled = styled.div`
+export const TaskHeaderStyled = styled.header`
   display: flex;
   align-items: center;
-  gap: 20px;
-  margin-top: 36px;
+  justify-content: space-between;
 `;

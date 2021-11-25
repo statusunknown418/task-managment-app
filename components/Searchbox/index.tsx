@@ -15,11 +15,11 @@ const DynamicDialogMenu = dynamic<DialogMenuProps>(
 export const SearchBox: NextPage = () => {
   return (
     <div style={{ position: 'relative' }}>
-      <IconStyled iconRight iconSize={'25px'}>
+      <IconStyled absolutePosition iconRight iconSize={20} isOnSearchbox>
         <MagnifyingGlassIcon width={'20px'} height={'20px'} />
       </IconStyled>
       <SearchboxStyled type={'text'} placeholder="Search" />
-      <IconStyled iconLeft iconSize={'25px'}>
+      <IconStyled absolutePosition iconLeft iconSize={20} isOnSearchbox>
         <DynamicDialogMenu />
       </IconStyled>
     </div>
