@@ -1,0 +1,8 @@
+overwrite: true
+schema: 'https://syn-api-prod.herokuapp.com/graphql'
+documents: null
+generates:
+  generated/graphql-generated.ts:
+    plugins:
+      - 'typescript'
+      - 'typescript-react-apollo'
