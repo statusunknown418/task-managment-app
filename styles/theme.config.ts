@@ -17,6 +17,8 @@ export const CustomGlobalStyles = createGlobalStyle`
   } 
 `;
 
+export type ThemeProperties = typeof customTheme;
+
 export const customTheme = {
   // Colors
   mainText: '#ffffff',
@@ -29,4 +31,8 @@ export const customTheme = {
 
   // Typography
   primaryFontSize: '15px',
+
+  // Sizing
+  sidebarWidth: '232px',
+  sidebarMargin: '32px',
 };
