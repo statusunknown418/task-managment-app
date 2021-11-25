@@ -1,6 +1,11 @@
 import styled from 'styled-components';
 import { ThemeProperties } from '../../styles/theme.config';
 
+export interface SearchBoxProps {
+  iconLeft?: boolean;
+  iconRight?: boolean;
+  iconSize: string | number;
+}
 export const SearchboxStyled = styled.input`
   width: 100%;
   height: 64px;

@@ -1,10 +1,8 @@
-import { SearchIcon } from '@heroicons/react/outline';
 import styled from 'styled-components';
-import { SearchBoxProps } from '.';
+import { SearchBoxProps } from './Searchbox.styled';
 import { ThemeProperties } from '../../styles/theme.config';
 
 export const IconStyled = styled.i<SearchBoxProps>`
-  width: 20px;
   position: absolute;
   inset-block: 22px;
 
