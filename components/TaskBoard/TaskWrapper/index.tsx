@@ -35,7 +35,7 @@ export const TaskWrapper: NextPage<{ sectionTitle: string }> = ({
         direction="column"
         alignItems="flex-start"
         gap={16}
-        style={{ border: '1px solid white', width: '100%' }}
+        style={{ width: '100%' }}
       >
         {tasks?.tasks.map((task) => (
           <TaskCard key={task.id} task={task} />

@@ -15,7 +15,7 @@ export const TaskCard: NextPage<Props> = ({
       direction="column"
       grow={1}
       basis="1"
-      style={{ padding: '16px', borderRadius: '8px' }}
+      style={{ padding: '16px', borderRadius: '8px', minWidth: '100%' }}
     >
       <p>{name}</p>
       <p>{name}</p>
