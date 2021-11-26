@@ -13,14 +13,7 @@ export interface AddTaskPopoverProps {}
 export const AddTaskPopover: NextPage<AddTaskPopoverProps> = ({ children }) => {
   return (
     <Popover.Root>
-      <TriggerStyled
-      // bgColor={'#DA584B'}
-      // triggerSize={34}
-      // p={4}
-      // triggerColor="white"
-      // rounded={8}
-      // hoverBgColor="#fa7c70"
-      >
+      <TriggerStyled>
         <span
           style={{
             backgroundColor: '#DA584B',
