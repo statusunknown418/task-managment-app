@@ -8,7 +8,9 @@ import { SearchboxStyled } from '../Searchbox/Searchbox.styled';
 interface FormInputs {
   title: string;
 }
-export const AddTaskPopover: NextPage = ({ children }) => {
+
+export interface AddTaskPopoverProps {}
+export const AddTaskPopover: NextPage<AddTaskPopoverProps> = ({ children }) => {
   return (
     <Popover.Root>
       <TriggerStyled

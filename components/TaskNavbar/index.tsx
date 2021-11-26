@@ -6,9 +6,17 @@ import {
 } from '@radix-ui/react-icons';
 import { NextPage } from 'next';
 import { useRouter } from 'next/dist/client/router';
-import { AddTaskPopover } from '../AddTaskPopover';
+import { AddTaskPopover, AddTaskPopoverProps } from '../AddTaskPopover';
 import { Flex } from '../Flex';
 import { IconStyled } from '../Searchbox/IconSidebar.styled';
+import dynamic from 'next/dynamic';
+
+const DynamicAddTaskPopover = dynamic<AddTaskPopoverProps>(
+  () => import('../AddTaskPopover').then((mod) => mod.AddTaskPopover),
+  {
+    ssr: false,
+  }
+);
 
 export const TaskNavbar: NextPage = () => {
   const router = useRouter();
@@ -30,9 +38,9 @@ export const TaskNavbar: NextPage = () => {
       </Flex>
 
       <Flex>
-        <AddTaskPopover>
+        <DynamicAddTaskPopover>
           <PlusIcon height={24} width={24} />
-        </AddTaskPopover>
+        </DynamicAddTaskPopover>
       </Flex>
     </Flex>
   );
