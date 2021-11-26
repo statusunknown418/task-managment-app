@@ -21,15 +21,26 @@ export const TaskWrapper: NextPage<{ sectionTitle: string }> = ({
   });
 
   return (
-    <div style={{ minWidth: '25%' }}>
+    <Flex
+      direction="column"
+      alignItems="flex-start"
+      gap={16}
+      style={{ minWidth: '100%' }}
+      // style={{ border: '1px solid red' }}
+    >
       <h3 style={{ textTransform: 'capitalize' }}>
         {sectionTitle.replace(/[^a-zA-Z+$]/, ' ')}
       </h3>
-      <Flex direction="column" alignItems="flex-start">
+      <Flex
+        direction="column"
+        alignItems="flex-start"
+        gap={16}
+        style={{ border: '1px solid white', width: '100%' }}
+      >
         {tasks?.tasks.map((task) => (
           <TaskCard key={task.id} task={task} />
         ))}
       </Flex>
-    </div>
+    </Flex>
   );
 };

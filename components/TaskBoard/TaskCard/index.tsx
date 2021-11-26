@@ -13,8 +13,13 @@ export const TaskCard: NextPage<Props> = ({
       isCard
       alignItems="flex-start"
       direction="column"
-      style={{ minWidth: '100%' }}
+      grow={1}
+      basis="1"
+      style={{ padding: '16px', borderRadius: '8px' }}
     >
+      <p>{name}</p>
+      <p>{name}</p>
+      <p>{name}</p>
       <p>{name}</p>
     </Flex>
   );

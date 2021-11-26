@@ -11,11 +11,14 @@ interface FlexProps {
   mb?: number;
   direction?: 'row' | 'column';
   isCard?: boolean;
+  grow?: number;
+  basis?: string;
 }
 
 export const Flex = styled.div<FlexProps>`
   flex-direction: ${(props) => (props.direction ? props.direction : 'row')};
-  display: flex;
+  ${(props) => (props.basis ? `flex: ${props.basis}` : 'display: flex')};
+
   align-items: ${(props) => (props.alignItems ? props.alignItems : 'center')};
   justify-content: ${(props) => props.justifyContent};
   gap: ${(props) => props.gap}px;
@@ -24,4 +27,5 @@ export const Flex = styled.div<FlexProps>`
   margin-top: ${(props) => props.mt}px;
   margin-bottom: ${(props) => props.mb}px;
   ${(props) => props.isCard && `background-color: ${props.theme.accentBg};`}
+  ${(props) => props.grow && `flex-grow: ${props.grow};`}
 `;

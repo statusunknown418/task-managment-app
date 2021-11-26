@@ -23,10 +23,11 @@ export const TaskBoard: NextPage = () => {
   console.log(sectionNamesSet);
 
   return (
-    <ContainerStyled>
+    <ContainerStyled pb={20}>
       {Array.from(sectionNamesSet).map((sectionName, id) => {
         return (
-          <div key={id}>
+          // TODO continue fixing the styles
+          <div key={id} style={{ minWidth: '20%' }}>
             <TaskWrapper sectionTitle={sectionName} />
           </div>
         );
