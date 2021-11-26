@@ -5,8 +5,6 @@ import { Query } from '../../../__generated__/graphql-schema-generated';
 import { Flex } from '../../Flex';
 import { TaskCard } from '../TaskCard';
 
-type CustomComp = (props: { sectionTitle: string }) => JSX.Element;
-
 export const TaskWrapper: NextPage<{ sectionTitle: string }> = ({
   sectionTitle,
 }) => {
@@ -24,7 +22,9 @@ export const TaskWrapper: NextPage<{ sectionTitle: string }> = ({
 
   return (
     <div style={{ minWidth: '25%' }}>
-      <h3 style={{ textTransform: 'capitalize' }}>{sectionTitle}</h3>
+      <h3 style={{ textTransform: 'capitalize' }}>
+        {sectionTitle.replace(/[^a-zA-Z+$]/, ' ')}
+      </h3>
       <Flex direction="column" alignItems="flex-start">
         {tasks?.tasks.map((task) => (
           <TaskCard key={task.id} task={task} />
