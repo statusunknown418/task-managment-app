@@ -1,5 +1,5 @@
 import { NextPage } from 'next';
-import { TaskCardStyled } from './TaskCard.styled';
+import { Flex } from '../../Flex';
 
 interface Props {
   name: string;
@@ -7,8 +7,12 @@ interface Props {
 
 export const TaskCard: NextPage<Props> = ({ name }) => {
   return (
-    <TaskCardStyled>
-      <>{name}</>
-    </TaskCardStyled>
+    <Flex
+      alignItems="flex-start"
+      direction="column"
+      style={{ minWidth: '100%' }}
+    >
+      <p>{name}</p>
+    </Flex>
   );
 };

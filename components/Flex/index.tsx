@@ -1,17 +1,19 @@
 import { NextPage } from 'next';
-import styled from 'styled-components';
+import styled, { CSSProperties } from 'styled-components';
 
 interface FlexProps {
-  alignItems?: 'center' | 'stretch' | 'baseline';
-  justifyContent?: 'center' | 'stretch' | 'space-between' | 'space-around';
+  alignItems?: 'flex-start' | 'center' | 'flex-end';
+  justifyContent?: 'center' | 'space-between' | 'space-around';
   gap?: number;
   marginX?: number;
   marginY?: number;
   mt?: number;
   mb?: number;
+  direction?: 'row' | 'column';
 }
 
 export const Flex = styled.div<FlexProps>`
+  flex-direction: ${(props) => (props.direction ? props.direction : 'row')};
   display: flex;
   align-items: ${(props) => (props.alignItems ? props.alignItems : 'center')};
   justify-content: ${(props) => props.justifyContent};

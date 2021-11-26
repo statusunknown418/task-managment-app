@@ -2,9 +2,7 @@ import styled from 'styled-components';
 import { ThemeProperties } from '../../styles/theme.config';
 
 export const ContainerStyled = styled.section`
-  display: grid;
-  grid-template-columns: repeat(3, minmax(350px, 1fr));
-  grid-auto-flow: column;
+  display: flex;
   gap: 32px;
   overflow: auto;
   ::-webkit-scrollbar {

@@ -6,19 +6,21 @@ export interface SearchBoxProps extends SelectorProps {
   isOnSearchbox?: boolean;
   iconLeft?: boolean;
   iconRight?: boolean;
-  iconSize: string | number;
+  iconSize?: string | number;
   absolutePosition?: boolean;
   bordered?: boolean;
   offset?: number;
   offsetY?: number;
+  h?: number;
+  p?: number;
 }
 export const SearchboxStyled = styled.input`
   width: 100%;
-  height: 64px;
-  padding-block: 22px;
+  height: ${(props: SearchBoxProps) => (props.h ? `${props.h}px` : '60px')};
+  padding: ${(props: SearchBoxProps) =>
+    props.p ? `${props.p}px` : 'padding-block: 22px;padding-left: 72px;'};
 
   // * Taking in mind the icon
-  padding-left: 72px;
   border-radius: 16px;
   background-color: ${({ theme }: { theme: ThemeProperties }) =>
     theme.accentBg};
