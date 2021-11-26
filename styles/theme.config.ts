@@ -15,6 +15,24 @@ export const CustomGlobalStyles = createGlobalStyle`
       theme.darkBg};
     color: ${({ theme }: { theme: typeof customTheme }) => theme.mainText};
   } 
+  ::-webkit-scrollbar {
+    margin-block: .5rem;
+    padding-block: .5rem;
+    width: 7px;
+    height: 7px;
+    background-color: ${({ theme }: { theme: ThemeProperties }) =>
+      theme.darkBg} /
+      10;
+    border-radius: 100vw;
+    border: 1px solid
+      ${({ theme }: { theme: ThemeProperties }) => theme.accentText};
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: ${({ theme }: { theme: ThemeProperties }) =>
+      theme.accentText};
+    border-radius: 100vw;
+  }
 `;
 
 export type ThemeProperties = typeof customTheme;

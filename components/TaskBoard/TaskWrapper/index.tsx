@@ -26,7 +26,6 @@ export const TaskWrapper: NextPage<{ sectionTitle: string }> = ({
       alignItems="flex-start"
       gap={16}
       style={{ minWidth: '100%' }}
-      // style={{ border: '1px solid red' }}
     >
       <h3 style={{ textTransform: 'capitalize' }}>
         {sectionTitle.replace(/[^a-zA-Z+$]/, ' ')}
@@ -35,7 +34,7 @@ export const TaskWrapper: NextPage<{ sectionTitle: string }> = ({
         direction="column"
         alignItems="flex-start"
         gap={16}
-        style={{ width: '100%' }}
+        style={{ minWidth: '100%' }}
       >
         {tasks?.tasks.map((task) => (
           <TaskCard key={task.id} task={task} />

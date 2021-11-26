@@ -23,7 +23,7 @@ export const TaskBoard: NextPage = () => {
   console.log(sectionNamesSet);
 
   return (
-    <ContainerStyled pb={20}>
+    <ContainerStyled style={{ height: '78.5vh' }} pb={16}>
       {Array.from(sectionNamesSet).map((sectionName, id) => {
         return (
           <div key={id} style={{ minWidth: '20%' }}>

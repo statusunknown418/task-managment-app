@@ -18,9 +18,6 @@ export const TaskCard: NextPage<Props> = ({
       style={{ padding: '16px', borderRadius: '8px', minWidth: '100%' }}
     >
       <p>{name}</p>
-      <p>{name}</p>
-      <p>{name}</p>
-      <p>{name}</p>
     </Flex>
   );
 };
