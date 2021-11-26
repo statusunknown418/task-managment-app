@@ -10,6 +10,7 @@ interface FlexProps {
   mt?: number;
   mb?: number;
   direction?: 'row' | 'column';
+  isCard?: boolean;
 }
 
 export const Flex = styled.div<FlexProps>`
@@ -22,4 +23,5 @@ export const Flex = styled.div<FlexProps>`
   margin-inline: ${(props) => props.marginX}px;
   margin-top: ${(props) => props.mt}px;
   margin-bottom: ${(props) => props.mb}px;
+  ${(props) => props.isCard && `background-color: ${props.theme.accentBg};`}
 `;
