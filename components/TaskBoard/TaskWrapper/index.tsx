@@ -5,11 +5,11 @@ import { Query } from '../../../__generated__/graphql-schema-generated';
 import { Flex } from '../../Flex';
 import { TaskCard } from '../TaskCard';
 
-interface Props {
-  sectionTitle: string;
-}
+type CustomComp = (props: { sectionTitle: string }) => JSX.Element;
 
-export const TaskWrapper: NextPage<Props> = ({ sectionTitle }) => {
+export const TaskWrapper: NextPage<{ sectionTitle: string }> = ({
+  sectionTitle,
+}) => {
   const {
     data: tasks,
     loading,
@@ -19,9 +19,10 @@ export const TaskWrapper: NextPage<Props> = ({ sectionTitle }) => {
       input: {},
     },
   });
+
   return (
     <div style={{ minWidth: '25%' }}>
-      <h3>{sectionTitle}</h3>
+      <h3 style={{ textTransform: 'capitalize' }}>{sectionTitle}</h3>
       <Flex direction="column" alignItems="flex-start"></Flex>
     </div>
   );

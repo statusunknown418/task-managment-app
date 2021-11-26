@@ -6,7 +6,7 @@ import {
 } from '@radix-ui/react-icons';
 import { NextPage } from 'next';
 import { useRouter } from 'next/dist/client/router';
-import { AddTaskPopover, AddTaskPopoverProps } from '../AddTaskPopover';
+import { AddTaskPopoverProps } from '../AddTaskPopover';
 import { Flex } from '../Flex';
 import { IconStyled } from '../Searchbox/IconSidebar.styled';
 import dynamic from 'next/dynamic';

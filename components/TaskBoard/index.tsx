@@ -20,23 +20,17 @@ export const TaskBoard: NextPage = () => {
     taskColumnData?.tasks.map((task) => task.status)
   );
 
-  console.log({
-    taskColumnData,
-    loading,
-    error,
-    sectionNamesSet,
-  });
+  console.log(sectionNamesSet);
+
   return (
     <ContainerStyled>
-      <TaskWrapper sectionTitle="adsasd" />
-      <TaskWrapper sectionTitle="adsasd" />
-      <TaskWrapper sectionTitle="adsasd" />
-      <TaskWrapper sectionTitle="adsasd" />
-      <TaskWrapper sectionTitle="adsasd" />
-      <TaskWrapper sectionTitle="adsasd" />
-      <TaskWrapper sectionTitle="adsasd" />
-      <TaskWrapper sectionTitle="adsasd" />
-      <TaskWrapper sectionTitle="adsasd" />
+      {Array.from(sectionNamesSet).map((sectionName, id) => {
+        return (
+          <div key={id}>
+            <TaskWrapper sectionTitle={sectionName} />
+          </div>
+        );
+      })}
     </ContainerStyled>
   );
 };
