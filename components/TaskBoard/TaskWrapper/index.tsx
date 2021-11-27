@@ -3,6 +3,7 @@ import { NextPage } from 'next';
 import { getTaskByStatus } from '../../../graphql/queries/getTaskByStatus';
 import { Query } from '../../../__generated__/graphql-schema-generated';
 import { Flex } from '../../Flex';
+import { Spinner } from '../../Spinner';
 import { TaskCard } from '../TaskCard';
 
 export const TaskWrapper: NextPage<{ sectionTitle: string }> = ({
@@ -36,6 +37,7 @@ export const TaskWrapper: NextPage<{ sectionTitle: string }> = ({
         gap={16}
         style={{ minWidth: '100%' }}
       >
+        {loading && <Spinner />}
         {tasks?.tasks.map((task) => (
           <TaskCard key={task.id} task={task} />
         ))}

@@ -13,6 +13,8 @@ export interface SearchBoxProps extends SelectorProps {
   offsetY?: number;
   h?: number;
   p?: number;
+  fontWeight?: string;
+  fontSize?: number;
 }
 export const SearchboxStyled = styled.input`
   width: 100%;
@@ -22,7 +24,13 @@ export const SearchboxStyled = styled.input`
 
   // * Taking in mind the icon
   border-radius: 16px;
-  background-color: ${({ theme }: { theme: ThemeProperties }) =>
-    theme.accentBg};
+  background-color: ${({ theme }: { theme: ThemeProperties }) => theme.accentBg};
   color: ${({ theme }: { theme: ThemeProperties }) => theme.accentText};
+  font-weight: ${(props) => props.fontWeight};
+  font-size: ${(props) => props.fontSize}px;
+
+  &:focus-within {
+    color: ${({ theme }: { theme: ThemeProperties }) => theme.mainText};
+    outline: none;
+  }
 `;

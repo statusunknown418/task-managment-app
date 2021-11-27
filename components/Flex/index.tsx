@@ -13,6 +13,7 @@ interface FlexProps {
   isCard?: boolean;
   grow?: number;
   basis?: string;
+  p?: number;
 }
 
 export const Flex = styled.div<FlexProps>`
@@ -27,5 +28,6 @@ export const Flex = styled.div<FlexProps>`
   margin-top: ${(props) => props.mt}px;
   margin-bottom: ${(props) => props.mb}px;
   ${(props) => props.isCard && `background-color: ${props.theme.accentBg};`}
-  ${(props) => props.grow && `flex-grow: ${props.grow};`}
+  ${(props) => props.grow && `flex-grow: ${props.grow};`};
+  padding: ${(props) => props.p}px;
 `;
