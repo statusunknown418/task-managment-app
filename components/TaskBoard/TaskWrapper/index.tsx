@@ -6,9 +6,7 @@ import { Flex } from '../../Flex';
 import { Spinner } from '../../Spinner';
 import { TaskCard } from '../TaskCard';
 
-export const TaskWrapper: NextPage<{ sectionTitle: string }> = ({
-  sectionTitle,
-}) => {
+export const TaskWrapper: NextPage<{ sectionTitle: string }> = ({ sectionTitle }) => {
   const {
     data: tasks,
     loading,
@@ -29,7 +27,7 @@ export const TaskWrapper: NextPage<{ sectionTitle: string }> = ({
       style={{ minWidth: '100%' }}
     >
       <h3 style={{ textTransform: 'capitalize' }}>
-        {sectionTitle.replace(/[^a-zA-Z+$]/, ' ')}
+        {sectionTitle.replace(/[^a-zA-Z+$]/, ' ')} (0{tasks?.tasks.length})
       </h3>
       <Flex
         direction="column"
