@@ -27,7 +27,7 @@ export const TaskBoard: NextPage = () => {
     <ContainerStyled style={{ height: '78.5vh' }} pb={16}>
       {Array.from(sectionNamesSet).map((sectionName, id) => {
         return (
-          <div key={id} style={{ width: '20%' }}>
+          <div key={id} style={{ minWidth: '350px' }}>
             <TaskWrapper sectionTitle={sectionName} />
           </div>
         );

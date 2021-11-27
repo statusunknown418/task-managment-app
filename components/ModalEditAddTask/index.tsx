@@ -6,6 +6,7 @@ import { SearchBox } from '../Searchbox';
 import { SearchboxStyled } from '../Searchbox/Searchbox.styled';
 import { Flex } from '../Flex';
 import { Task } from '../../__generated__/graphql-schema-generated';
+import Image from 'next/image';
 
 export interface ExtendedDialogTriggerProps extends DialogTriggerProps {
   bgColor?: string;
@@ -71,6 +72,8 @@ export interface CustomModalProps extends Partial<Task> {
   onSubmit?: (task: Task) => void;
 }
 
+export const ItemSubmenuStyled = styled(Flex)``;
+
 export const ModalAddEditTask: NextPage<CustomModalProps> = ({ children, onSubmit }) => {
   return (
     <Dialog.Root>
@@ -88,6 +91,15 @@ export const ModalAddEditTask: NextPage<CustomModalProps> = ({ children, onSubmi
             height={20}
           />
         </Dialog.Title>
+
+        <Flex gap={16} alignItems="center" justifyContent="space-between">
+          <div>
+            <Flex>
+              <Image src={'/icons/PlusMinusIcon.svg'} alt="" width={15} height={15} />
+            </Flex>
+          </div>
+        </Flex>
+
         <Dialog.Description>
           <Flex gap={24} alignItems="center">
             <ModalCloseStyled p={8}>Cancel</ModalCloseStyled>
@@ -95,7 +107,6 @@ export const ModalAddEditTask: NextPage<CustomModalProps> = ({ children, onSubmi
               Create
             </ModalCloseStyled>
           </Flex>
-          <Flex gap={16} alignItems="center" justifyContent="space-between"></Flex>
         </Dialog.Description>
       </ModalContentStyled>
     </Dialog.Root>
