@@ -7,6 +7,7 @@ import { SearchboxStyled } from '../Searchbox/Searchbox.styled';
 import { Flex } from '../Flex';
 import { Task } from '../../__generated__/graphql-schema-generated';
 import Image from 'next/image';
+import { ModalCloseStyled } from './ModalClose.styled';
 
 export interface ExtendedDialogTriggerProps extends DialogTriggerProps {
   bgColor?: string;
@@ -52,29 +53,17 @@ export const ModalContentStyled = styled(Dialog.Content)<ExtendedModalContentPro
   }
 `;
 
-export interface ModalCloseProps extends Dialog.DialogCloseProps {
-  isCreate?: boolean;
-  p?: number;
-  textColor?: string;
-  fontWeight?: string;
-}
-export const ModalCloseStyled = styled(Dialog.Close)<ModalCloseProps>`
-  padding: ${({ p }) => p}px;
-  background-color: ${(props) =>
-    props.isCreate ? props.theme.primaryClrRed : 'transparent'};
-  color: ${(props) => (props.textColor ? props.textColor : props.theme.mainText)};
-  font-weight: ${(props) => props.fontWeight};
-  border-radius: ${(props) => (props.isCreate ? '8' : '0')}px;
-`;
+export const ItemSubmenuStyled = styled(Flex)``;
 
 export interface CustomModalProps extends Partial<Task> {
   onClose?: () => void;
   onSubmit?: (task: Task) => void;
 }
-
-export const ItemSubmenuStyled = styled(Flex)``;
-
-export const ModalAddEditTask: NextPage<CustomModalProps> = ({ children, onSubmit }) => {
+export const ModalAddEditTask: NextPage<CustomModalProps> = ({
+  children,
+  onSubmit,
+  name,
+}) => {
   return (
     <Dialog.Root>
       <OverlayStyled />
@@ -89,6 +78,7 @@ export const ModalAddEditTask: NextPage<CustomModalProps> = ({ children, onSubmi
             placeholder="Task title"
             fontSize={17}
             height={20}
+            value={name || ''}
           />
         </Dialog.Title>
 
