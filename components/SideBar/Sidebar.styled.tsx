@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import type { ThemeProperties } from '../../styles/theme.config';
 
 export const SidebarStyled = styled.aside`
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   min-width: ${({ theme }: { theme: ThemeProperties }) => theme.sidebarWidth};

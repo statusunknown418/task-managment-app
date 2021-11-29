@@ -2,7 +2,7 @@ import { NextPage } from 'next';
 import { SidebarStyled } from './Sidebar.styled';
 import Image from 'next/image';
 import { Selector } from '../Selector';
-import { DashboardIcon, HamburgerMenuIcon } from '@radix-ui/react-icons';
+import { DashboardIcon, HamburgerMenuIcon, PersonIcon } from '@radix-ui/react-icons';
 import { useRouter } from 'next/dist/client/router';
 import Link from 'next/link';
 import { forwardRef } from 'react';
@@ -24,12 +24,7 @@ export const Sidebar: NextPage = () => {
 
       <Link href={'/'} passHref>
         <div>
-          <Selector
-            name="dashboard"
-            isFirst
-            routeName="/"
-            currentRoute={router.pathname}
-          >
+          <Selector name="dashboard" isFirst routeName="/" currentRoute={router.pathname}>
             <DashboardIcon width={20} height={20} />
           </Selector>
         </div>
@@ -37,12 +32,16 @@ export const Sidebar: NextPage = () => {
 
       <Link href={'/my-tasks'} passHref>
         <div>
-          <Selector
-            name="my tasks"
-            routeName="/my-tasks"
-            currentRoute={router.pathname}
-          >
+          <Selector name="my tasks" routeName="/my-tasks" currentRoute={router.pathname}>
             <HamburgerMenuIcon width={20} height={20} />
+          </Selector>
+        </div>
+      </Link>
+
+      <Link href={'/profile'} passHref>
+        <div>
+          <Selector name="My Profile" routeName="/profile" currentRoute={router.pathname}>
+            <PersonIcon width={20} height={20} />
           </Selector>
         </div>
       </Link>

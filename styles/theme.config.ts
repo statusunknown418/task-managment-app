@@ -11,10 +11,25 @@ export const CustomGlobalStyles = createGlobalStyle`
   }
 
   body {
-    background-color:${({ theme }: { theme: typeof customTheme }) =>
-      theme.darkBg};
+    background-color:${({ theme }: { theme: typeof customTheme }) => theme.darkBg};
     color: ${({ theme }: { theme: typeof customTheme }) => theme.mainText};
   } 
+  ::-webkit-scrollbar {
+    margin-block: .5rem;
+    padding-block: .5rem;
+    width: 7px;
+    height: 7px;
+    background-color: ${({ theme }: { theme: ThemeProperties }) => theme.darkBg} /
+      10;
+    border-radius: 100vw;
+    border: 1px solid
+      ${({ theme }: { theme: ThemeProperties }) => theme.accentText};
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: ${({ theme }: { theme: ThemeProperties }) => theme.accentText};
+    border-radius: 100vw;
+  }
 `;
 
 export type ThemeProperties = typeof customTheme;
@@ -25,9 +40,15 @@ export const customTheme = {
   accentText: '#94979A',
   darkBg: '#222528',
   accentBg: '#2C2F33',
+  primaryBgRed: '#3d3335',
+  secondaryBgGreen: '#333c36',
+  tertiaryBgYellow: '#3e3c36',
+  quaternaryBgBlue: '#38424d',
+
   primaryClrRed: '#DA584B',
   secondaryClrGreen: '#70B252',
   tertiaryClrYellow: '#E5B454',
+  quaternaryClrBlue: '#548ADB',
 
   // Typography
   primaryFontSize: '15px',
