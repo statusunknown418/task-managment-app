@@ -1,17 +1,18 @@
-import { DialogTrigger, DialogTriggerProps } from '@radix-ui/react-dialog';
 import { NextPage } from 'next';
 import styled from 'styled-components';
 import * as Dialog from '@radix-ui/react-dialog';
-import { SearchBox } from '../Searchbox';
 import { SearchboxStyled } from '../Searchbox/Searchbox.styled';
 import { Flex } from '../Flex';
 import { Task } from '../../__generated__/graphql-schema-generated';
 import Image from 'next/image';
 import { ModalCloseStyled } from './ModalClose.styled';
-import { useState } from 'react';
-import { useMutation } from '@apollo/client';
 import { ModalContentStyled } from './ModalContent.styled';
 import { ModalTriggerStyled } from './ModalTrigger.styled';
+import {
+  PointEstimate,
+  useUpdateTaskMutation,
+} from '../../__generated__/graphql-remastered';
+import { useForm } from 'react-hook-form';
 
 export const OverlayStyled = styled(Dialog.Overlay)`
   backdrop-filter: brightness(0.7);
@@ -22,18 +23,35 @@ export const OverlayStyled = styled(Dialog.Overlay)`
   height: 100vh;
 `;
 
-export interface CustomModalProps extends Partial<Task> {
-  onClose?: () => void;
-  onSubmit?: (task: Task) => void;
+export interface CustomModalProps {
+  task: Partial<Task>;
   type: 'create' | 'edit';
 }
 export const ModalAddEditTask: NextPage<CustomModalProps> = ({
   children,
-  onSubmit,
-  name,
   type,
+  task,
 }) => {
-  const [taskNameValue, setTaskNameValue] = useState(name);
+  interface MutationData {
+    taskName: string;
+    points: number;
+  }
+  const [updateTask, { data, error, loading }] = useUpdateTaskMutation();
+  const { register, setValue, handleSubmit } = useForm<MutationData>();
+
+  const onSubmitHandler = handleSubmit(async (data) => {
+    const { taskName, points } = data;
+    await updateTask({
+      variables: {
+        updateTaskInput: {
+          id: task.id,
+          name: taskName,
+          pointEstimate: PointEstimate.EIGHT,
+        },
+      },
+    });
+    console.log({ data, error });
+  });
 
   return (
     <Dialog.Root>
@@ -46,10 +64,10 @@ export const ModalAddEditTask: NextPage<CustomModalProps> = ({
             type={'text'}
             p={2}
             fontWeight="700"
-            placeholder={name || 'Task name'}
+            placeholder={task.name || 'Task name'}
             fontSize={17}
             height={20}
-            onChange={(e) => setTaskNameValue(e.target.value)}
+            {...register('taskName', { required: true })}
           />
         </Dialog.Title>
 
@@ -63,7 +81,7 @@ export const ModalAddEditTask: NextPage<CustomModalProps> = ({
 
         <Flex gap={24} alignItems="center">
           <ModalCloseStyled p={8}>Cancel</ModalCloseStyled>
-          <ModalCloseStyled p={8} isPrimary onClick={() => console.log(taskNameValue)}>
+          <ModalCloseStyled p={8} onClick={() => onSubmitHandler()} type="submit">
             {type}
           </ModalCloseStyled>
         </Flex>
