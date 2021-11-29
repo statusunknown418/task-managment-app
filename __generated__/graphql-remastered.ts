@@ -63,11 +63,11 @@ export type MutationUpdateTaskArgs = {
 
 /** Estimate point for a task */
 export enum PointEstimate {
-  Eight = 'EIGHT',
-  Four = 'FOUR',
-  One = 'ONE',
-  Two = 'TWO',
-  Zero = 'ZERO',
+  EIGHT = 'EIGHT',
+  FOUR = 'FOUR',
+  ONE = 'ONE',
+  TWO = 'TWO',
+  ZERO = 'ZERO',
 }
 
 export type Query = {
@@ -113,7 +113,7 @@ export enum TaskTag {
 
 export type UpdateTaskInput = {
   dueDate?: InputMaybe<Scalars['DateTime']>;
-  id: Scalars['String'];
+  id?: Scalars['String'];
   name?: InputMaybe<Scalars['String']>;
   pointEstimate?: InputMaybe<PointEstimate>;
   position?: InputMaybe<Scalars['Float']>;
