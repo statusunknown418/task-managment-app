@@ -1,14 +1,12 @@
-import { ClockIcon, DotsHorizontalIcon } from '@radix-ui/react-icons';
+import { DotsHorizontalIcon } from '@radix-ui/react-icons';
 import { NextPage } from 'next';
-import styled from 'styled-components';
 import { Task } from '../../../__generated__/graphql-schema-generated';
-import { CustomIcon } from '../../CustomIcon';
 import { Flex } from '../../Flex';
-import { CustomModalProps, ModalAddEditTask } from '../../ModalEditAddTask';
-import { TaskEditPopover } from '../../TaskEditPopover';
+import { CustomModalProps } from '../../ModalEditAddTask';
 import { DueDateCard } from '../DueDateCard';
 import dynamic from 'next/dynamic';
 import { spriteTypes, UserAvatar } from '../../UserAvatar';
+import { TagStyled } from '../Tags';
 
 const DynamicModalAddEditTask = dynamic<CustomModalProps>(
   () => import('../../ModalEditAddTask').then((mod) => mod.ModalAddEditTask),
@@ -31,40 +29,6 @@ enum pointsEnum {
   EIGHT = '9',
 }
 
-export interface TagProps {
-  tag: string;
-}
-
-export const TagStyled = styled.div<TagProps>`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding-block: 0.5rem;
-  padding-inline: 1rem;
-  border-radius: 5px;
-
-  ${(props) =>
-    props.tag === 'REACT' &&
-    `background-color: ${props.theme.quaternaryBgBlue};
-    color: ${props.theme.quaternaryClrBlue};`}
-
-  ${(props) =>
-    props.tag === 'ANDROID' &&
-    `background-color: ${props.theme.secondaryBgGreen};
-    color: ${props.theme.secondaryClrGreen};`}
-
-  ${(props) =>
-    props.tag === 'IOS' &&
-    `background-color: ${props.theme.tertiaryBgYellow};
-    color: ${props.theme.tertiaryClrYellow};`}
-
-
-  ${(props) =>
-    props.tag === 'RAILS' &&
-    `background-color: ${props.theme.primaryBgRed};
-    color: ${props.theme.primaryClrRed};`}
-`;
-
 export const TaskCard: NextPage<Props> = ({
   task: { id, dueDate, name, tags, pointEstimate, owner },
 }) => {
@@ -80,7 +44,7 @@ export const TaskCard: NextPage<Props> = ({
     >
       <Flex alignItems="center" justifyContent="space-between">
         <p style={{ fontWeight: 'bolder' }}>{name}</p>
-        <DynamicModalAddEditTask name={name}>
+        <DynamicModalAddEditTask name={name} type="edit">
           <DotsHorizontalIcon />
         </DynamicModalAddEditTask>
       </Flex>

@@ -1,6 +1,6 @@
 import { useQuery } from '@apollo/client';
 import { NextPage } from 'next';
-import { getAllTaskStatus } from '../../graphql/queries/getAllTaskStatus';
+import { useGetAllTaskStatusQuery } from '../../__generated__/graphql-remastered';
 import { Query } from '../../__generated__/graphql-schema-generated';
 import { Spinner } from '../Spinner';
 import { ContainerStyled } from './TasksContainer.styled';
@@ -11,7 +11,7 @@ export const TaskBoard: NextPage = () => {
     data: taskColumnData,
     loading,
     error,
-  } = useQuery<Query>(getAllTaskStatus, {
+  } = useGetAllTaskStatusQuery({
     variables: {
       input: {},
     },

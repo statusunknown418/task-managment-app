@@ -11,20 +11,7 @@ import { ModalCloseStyled } from './ModalClose.styled';
 import { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { ModalContentStyled } from './ModalContent.styled';
-
-export interface ExtendedDialogTriggerProps extends DialogTriggerProps {
-  bgColor?: string;
-  p?: number;
-  triggerColor?: string;
-  rounded?: number;
-}
-
-export const ModalTriggerStyled = styled(DialogTrigger)<ExtendedDialogTriggerProps>`
-  padding: ${({ p }) => p}px;
-  border-radius: ${({ rounded }) => rounded}px;
-  background-color: ${(props) => (props.bgColor ? props.bgColor : 'transparent')};
-  color: ${(props) => (props.triggerColor ? props.triggerColor : props.theme.accentText)};
-`;
+import { ModalTriggerStyled } from './ModalTrigger.styled';
 
 export const OverlayStyled = styled(Dialog.Overlay)`
   backdrop-filter: brightness(0.7);
@@ -38,11 +25,13 @@ export const OverlayStyled = styled(Dialog.Overlay)`
 export interface CustomModalProps extends Partial<Task> {
   onClose?: () => void;
   onSubmit?: (task: Task) => void;
+  type: 'create' | 'edit';
 }
 export const ModalAddEditTask: NextPage<CustomModalProps> = ({
   children,
   onSubmit,
   name,
+  type,
 }) => {
   const [taskNameValue, setTaskNameValue] = useState(name);
 
@@ -74,8 +63,8 @@ export const ModalAddEditTask: NextPage<CustomModalProps> = ({
 
         <Flex gap={24} alignItems="center">
           <ModalCloseStyled p={8}>Cancel</ModalCloseStyled>
-          <ModalCloseStyled p={8} isCreate onClick={() => console.log(taskNameValue)}>
-            Create
+          <ModalCloseStyled p={8} isPrimary onClick={() => console.log(taskNameValue)}>
+            {type}
           </ModalCloseStyled>
         </Flex>
       </ModalContentStyled>
