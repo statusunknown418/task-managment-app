@@ -3,9 +3,10 @@ import { NextPage } from 'next';
 import { Flex } from '../components/Flex';
 import { Spinner } from '../components/Spinner';
 import { getUser } from '../graphql/queries/getUser';
-import { Query, User } from '../__generated__/graphql-schema-generated';
+import { Query } from '../__generated__/graphql-schema-generated';
 import Image from 'next/image';
 import styled from 'styled-components';
+import { spriteTypes, UserAvatar } from '../components/UserAvatar';
 
 export interface StyledSpanProps {
   color?: string;
@@ -17,19 +18,6 @@ export const SpanStyled = styled.span<StyledSpanProps>`
 
 const ProfilePage: NextPage = () => {
   const { data: userData, loading, error } = useQuery<Query>(getUser);
-
-  enum spriteTypes {
-    MALE = 'male',
-    FEMALE = 'female',
-    HUMAN = 'human',
-    IDENTICON = 'identicon',
-    INITIALS = 'initials',
-    BOTTTS = 'bottts',
-    AVATAAARS = 'avataaars',
-    JDENTICON = 'jdenticon',
-    GRIDY = 'gridy',
-    MICAH = 'micah',
-  }
 
   return (
     <Flex direction="column" alignItems="center" accentBgColor rounded={8} gap={8} p={24}>
@@ -43,11 +31,11 @@ const ProfilePage: NextPage = () => {
           {userData?.profile.avatar ? (
             <Image src={userData.profile.avatar} width={200} height={200} alt="" />
           ) : (
-            <Image
-              src={`https://avatars.dicebear.com/api/${spriteTypes.BOTTTS}/${userData.profile.fullName}.svg`}
+            <UserAvatar
+              userName={userData.profile.fullName}
               width={200}
               height={200}
-              alt=""
+              spriteType={spriteTypes.BOTTTS}
             />
           )}
           <h2>{userData.profile.fullName}</h2>

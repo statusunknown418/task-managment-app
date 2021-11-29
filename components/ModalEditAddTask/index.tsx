@@ -8,6 +8,9 @@ import { Flex } from '../Flex';
 import { Task } from '../../__generated__/graphql-schema-generated';
 import Image from 'next/image';
 import { ModalCloseStyled } from './ModalClose.styled';
+import { useState } from 'react';
+import { useMutation } from '@apollo/client';
+import { ModalContentStyled } from './ModalContent.styled';
 
 export interface ExtendedDialogTriggerProps extends DialogTriggerProps {
   bgColor?: string;
@@ -32,29 +35,6 @@ export const OverlayStyled = styled(Dialog.Overlay)`
   height: 100vh;
 `;
 
-export interface ExtendedModalContentProps extends Dialog.DialogContentProps {
-  p?: number;
-  rounded?: number;
-}
-
-export const ModalContentStyled = styled(Dialog.Content)<ExtendedModalContentProps>`
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  width: 90vw;
-  transform: translate(-50%, -50%);
-  max-width: 450px;
-  max-height: 85vh;
-  padding: ${({ p }) => p}px;
-  background-color: ${(props) => props.theme.accentBg};
-  border-radius: ${({ rounded }) => rounded}px;
-  &:focus {
-    outline: none;
-  }
-`;
-
-export const ItemSubmenuStyled = styled(Flex)``;
-
 export interface CustomModalProps extends Partial<Task> {
   onClose?: () => void;
   onSubmit?: (task: Task) => void;
@@ -64,6 +44,8 @@ export const ModalAddEditTask: NextPage<CustomModalProps> = ({
   onSubmit,
   name,
 }) => {
+  const [taskNameValue, setTaskNameValue] = useState(name);
+
   return (
     <Dialog.Root>
       <OverlayStyled />
@@ -75,10 +57,10 @@ export const ModalAddEditTask: NextPage<CustomModalProps> = ({
             type={'text'}
             p={2}
             fontWeight="700"
-            placeholder="Task title"
+            placeholder={name || 'Task name'}
             fontSize={17}
             height={20}
-            value={name || ''}
+            onChange={(e) => setTaskNameValue(e.target.value)}
           />
         </Dialog.Title>
 
@@ -90,14 +72,12 @@ export const ModalAddEditTask: NextPage<CustomModalProps> = ({
           </div>
         </Flex>
 
-        <Dialog.Description>
-          <Flex gap={24} alignItems="center">
-            <ModalCloseStyled p={8}>Cancel</ModalCloseStyled>
-            <ModalCloseStyled p={8} isCreate>
-              Create
-            </ModalCloseStyled>
-          </Flex>
-        </Dialog.Description>
+        <Flex gap={24} alignItems="center">
+          <ModalCloseStyled p={8}>Cancel</ModalCloseStyled>
+          <ModalCloseStyled p={8} isCreate onClick={() => console.log(taskNameValue)}>
+            Create
+          </ModalCloseStyled>
+        </Flex>
       </ModalContentStyled>
     </Dialog.Root>
   );

@@ -4,9 +4,16 @@ import styled from 'styled-components';
 import { Task } from '../../../__generated__/graphql-schema-generated';
 import { CustomIcon } from '../../CustomIcon';
 import { Flex } from '../../Flex';
-import { ModalAddEditTask } from '../../ModalEditAddTask';
+import { CustomModalProps, ModalAddEditTask } from '../../ModalEditAddTask';
 import { TaskEditPopover } from '../../TaskEditPopover';
 import { DueDateCard } from '../DueDateCard';
+import dynamic from 'next/dynamic';
+import { spriteTypes, UserAvatar } from '../../UserAvatar';
+
+const DynamicModalAddEditTask = dynamic<CustomModalProps>(
+  () => import('../../ModalEditAddTask').then((mod) => mod.ModalAddEditTask),
+  { ssr: false }
+);
 
 interface Props {
   task: Partial<Task>;
@@ -24,23 +31,58 @@ enum pointsEnum {
   EIGHT = '9',
 }
 
+export interface TagProps {
+  tag: string;
+}
+
+export const TagStyled = styled.div<TagProps>`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-block: 0.5rem;
+  padding-inline: 1rem;
+  border-radius: 5px;
+
+  ${(props) =>
+    props.tag === 'REACT' &&
+    `background-color: ${props.theme.quaternaryBgBlue};
+    color: ${props.theme.quaternaryClrBlue};`}
+
+  ${(props) =>
+    props.tag === 'ANDROID' &&
+    `background-color: ${props.theme.secondaryBgGreen};
+    color: ${props.theme.secondaryClrGreen};`}
+
+  ${(props) =>
+    props.tag === 'IOS' &&
+    `background-color: ${props.theme.tertiaryBgYellow};
+    color: ${props.theme.tertiaryClrYellow};`}
+
+
+  ${(props) =>
+    props.tag === 'RAILS' &&
+    `background-color: ${props.theme.primaryBgRed};
+    color: ${props.theme.primaryClrRed};`}
+`;
+
 export const TaskCard: NextPage<Props> = ({
-  task: { id, dueDate, name, tags, pointEstimate },
+  task: { id, dueDate, name, tags, pointEstimate, owner },
 }) => {
   return (
     <Flex
       isCard
       alignItems="flex-start"
       direction="column"
-      grow={1}
       basis="1"
-      style={{ padding: '16px', borderRadius: '8px', minWidth: '100%' }}
+      p={16}
+      rounded={8}
+      style={{ minWidth: '100%' }}
     >
       <Flex alignItems="center" justifyContent="space-between">
         <p style={{ fontWeight: 'bolder' }}>{name}</p>
-        <ModalAddEditTask>
+        <DynamicModalAddEditTask name={name}>
           <DotsHorizontalIcon />
-        </ModalAddEditTask>
+        </DynamicModalAddEditTask>
       </Flex>
 
       <Flex alignItems="center" justifyContent="space-between" mt={10}>
@@ -53,8 +95,23 @@ export const TaskCard: NextPage<Props> = ({
 
       <Flex alignItems="center" mt={10} gap={10}>
         {tags?.map((tag, id) => (
-          <p key={id}>{tag.split('_').join(' ')}</p>
+          <TagStyled key={id} tag={tag}>
+            {tag.split('_').join(' ')}
+          </TagStyled>
         ))}
+      </Flex>
+
+      <Flex alignItems="center" justifyContent="space-between" mt={10}>
+        {owner ? (
+          <UserAvatar
+            userName={owner.fullName}
+            height={25}
+            width={25}
+            spriteType={spriteTypes.BOTTTS}
+          />
+        ) : (
+          <small>Couldn&apos;t retrieve owner 😞</small>
+        )}
       </Flex>
     </Flex>
   );

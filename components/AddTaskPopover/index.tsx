@@ -5,7 +5,6 @@ import { TriggerStyled } from '../NotificationDialogMenu/Trigger.styled';
 import { SearchboxStyled } from '../Searchbox/Searchbox.styled';
 import { Flex } from '../Flex';
 
-import * as RadioGroup from '@radix-ui/react-radio-group';
 import styled from 'styled-components';
 interface FormInputs {
   title: string;

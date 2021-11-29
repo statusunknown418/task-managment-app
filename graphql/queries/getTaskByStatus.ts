@@ -8,6 +8,10 @@ export const getTaskByStatus = gql`
       name
       tags
       pointEstimate
+      owner {
+        fullName
+        id
+      }
     }
   }
 `;
