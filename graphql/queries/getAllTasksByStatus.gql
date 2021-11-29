@@ -1,0 +1,13 @@
+query getAllTasksByStatus($input: FilterTaskInput!) {
+  tasks(input: $input) {
+    id
+    dueDate
+    name
+    tags
+    pointEstimate
+    owner {
+      fullName
+      id
+    }
+  }
+}
