@@ -18,15 +18,11 @@ interface Props {
 }
 
 enum pointsEnum {
-  ZERO = '1',
-  ONE = '2',
-  TWO = '3',
-  THREE = '4',
-  FOUR = '5',
-  FIVE = '6',
-  SIX = '7',
-  SEVEN = '8',
-  EIGHT = '9',
+  EIGHT = '8',
+  FOUR = '4',
+  ONE = '1',
+  TWO = '2',
+  ZERO = '0',
 }
 
 export const TaskCard: NextPage<Props> = ({
@@ -44,7 +40,10 @@ export const TaskCard: NextPage<Props> = ({
     >
       <Flex alignItems="center" justifyContent="space-between">
         <p style={{ fontWeight: 'bolder' }}>{name}</p>
-        <DynamicModalAddEditTask name={name} type="edit">
+        <DynamicModalAddEditTask
+          type="edit"
+          task={{ dueDate, name, tags, pointEstimate, id }}
+        >
           <DotsHorizontalIcon />
         </DynamicModalAddEditTask>
       </Flex>
