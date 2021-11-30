@@ -84,14 +84,6 @@ export const ModalAddEditTask: NextPage<CustomModalProps> = ({
               tags,
             },
           },
-          refetchQueries: [
-            {
-              query: GetAllTaskStatusDocument,
-              variables: {
-                input: {},
-              },
-            },
-          ],
         });
         console.log('create');
 
