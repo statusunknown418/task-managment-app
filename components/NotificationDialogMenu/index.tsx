@@ -1,5 +1,5 @@
 import { NextPage } from 'next';
-import * as Popover from '@radix-ui/react-popover';
+import * as Dialog from '@radix-ui/react-dialog';
 import { BellIcon } from '@radix-ui/react-icons';
 import { TriggerStyled } from './Trigger.styled';
 import { ContentStyled } from './Content.styled';
@@ -15,7 +15,7 @@ export interface DialogMenuProps {}
 
 export const DialogMenu: NextPage<DialogMenuProps> = () => {
   return (
-    <Popover.Root>
+    <Dialog.Root>
       <TriggerStyled>
         <BellIcon width={'20px'} height={'20px'} />
       </TriggerStyled>
@@ -23,9 +23,7 @@ export const DialogMenu: NextPage<DialogMenuProps> = () => {
         <h2>Notifications</h2>
 
         <PStyled>Stay calm, you don&apos;t have any notifications yet!</PStyled>
-
-        <Popover.Arrow fill="#94979A" offset={5} />
       </ContentStyled>
-    </Popover.Root>
+    </Dialog.Root>
   );
 };
