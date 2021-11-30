@@ -9,6 +9,7 @@ import { ModalCloseStyled } from './ModalClose.styled';
 import { ModalContentStyled } from './ModalContent.styled';
 import { ModalTriggerStyled } from './ModalTrigger.styled';
 import {
+  GetAllTaskStatusDocument,
   PointEstimate,
   Scalars,
   Status,
@@ -34,7 +35,7 @@ export interface CustomModalProps {
 }
 
 interface MutationData {
-  name: Scalars['String'];
+  taskName: Scalars['String'];
   pointEstimate: PointEstimate;
   position: Scalars['Float'];
   status: Status;
@@ -55,7 +56,7 @@ export const ModalAddEditTask: NextPage<CustomModalProps> = ({
   const { register, setValue, handleSubmit } = useForm<MutationData>();
 
   const onSubmitHandler = handleSubmit(async (data) => {
-    const { name, pointEstimate, dueDate, status, tags } = data;
+    const { taskName: name, pointEstimate, dueDate, status, tags } = data;
     try {
       if (type === 'edit') {
         await updateTask({
@@ -63,7 +64,7 @@ export const ModalAddEditTask: NextPage<CustomModalProps> = ({
             updateTaskInput: {
               id: task.id,
               name,
-              dueDate,
+              dueDate: new Date(dueDate),
               pointEstimate: pointEstimate.toString() && pointEstimate.toString(),
               tags,
               status,
@@ -81,6 +82,14 @@ export const ModalAddEditTask: NextPage<CustomModalProps> = ({
               tags,
             },
           },
+          refetchQueries: [
+            {
+              query: GetAllTaskStatusDocument,
+              variables: {
+                input: {},
+              },
+            },
+          ],
         });
         console.log('create');
       }
@@ -90,6 +99,7 @@ export const ModalAddEditTask: NextPage<CustomModalProps> = ({
     console.log({ data, error, createData, createError });
   });
 
+  console.log({ 'from api': task.dueDate });
   return (
     <Dialog.Root>
       <OverlayStyled />
@@ -104,7 +114,7 @@ export const ModalAddEditTask: NextPage<CustomModalProps> = ({
             placeholder={task.name || 'New task name'}
             fontSize={17}
             height={20}
-            {...register('name', { required: true })}
+            {...register('taskName', { value: task.name })}
           />
         </Dialog.Title>
 
@@ -131,7 +141,13 @@ export const ModalAddEditTask: NextPage<CustomModalProps> = ({
           </div>
           <div>
             <span>Due Date</span>
-            <input type="date" {...register('dueDate', { required: true })} />
+            {new Date(task.dueDate).toLocaleDateString()}
+            <input
+              type="date"
+              {...register('dueDate', {
+                value: new Date(task.dueDate),
+              })}
+            />
           </div>
           <div onClick={() => setValue('tags', [TaskTag.React, TaskTag.NodeJs])}>
             <span>React tag</span>
