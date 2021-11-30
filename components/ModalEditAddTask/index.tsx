@@ -47,6 +47,7 @@ export const ModalAddEditTask: NextPage<CustomModalProps> = ({
   type,
   task,
 }) => {
+  // TODO - refactor this
   const [updateTask, { data, error, loading }] = useUpdateTaskMutation();
   const [createTask, { data: createData, error: createError, loading: createLoading }] =
     useCreateTaskMutation();
@@ -89,9 +90,9 @@ export const ModalAddEditTask: NextPage<CustomModalProps> = ({
     console.log({ data, error, createData, createError });
   });
 
-  console.log({ task });
+  // console.log({ task });
 
-  return !createLoading || !loading ? (
+  return (
     <Dialog.Root>
       <OverlayStyled />
       <ModalTriggerStyled>{children}</ModalTriggerStyled>
@@ -151,7 +152,7 @@ export const ModalAddEditTask: NextPage<CustomModalProps> = ({
           <ModalCloseStyled
             p={8}
             variant="primary"
-            onClick={() => onSubmitHandler()}
+            onClick={() => handleSubmit((data) => console.log(data))}
             type="submit"
           >
             {type}
@@ -159,7 +160,5 @@ export const ModalAddEditTask: NextPage<CustomModalProps> = ({
         </Flex>
       </ModalContentStyled>
     </Dialog.Root>
-  ) : (
-    <Spinner />
   );
 };

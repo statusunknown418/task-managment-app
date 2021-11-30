@@ -28,7 +28,6 @@ export enum pointsEnum {
 export const TaskCard: NextPage<Props> = ({
   task: { id, dueDate, name, tags, pointEstimate, owner },
 }) => {
-  console.log(pointEstimate);
   return (
     <Flex
       isCard

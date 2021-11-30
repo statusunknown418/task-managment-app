@@ -21,8 +21,6 @@ export const TaskBoard: NextPage = () => {
     taskColumnData?.tasks.map((task) => task.status)
   );
 
-  console.log(sectionNamesSet);
-
   return (
     <ContainerStyled style={{ height: '78.5vh' }} pb={16}>
       {Array.from(sectionNamesSet).map((sectionName, id) => {
