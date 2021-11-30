@@ -19,6 +19,8 @@ import {
 } from '../../__generated__/graphql-remastered';
 import { useForm } from 'react-hook-form';
 import { Spinner } from '../Spinner';
+import { useFixedToast } from '../../utils/hooks/useFixedToast';
+import toast from 'react-hot-toast';
 
 export const OverlayStyled = styled(Dialog.Overlay)`
   backdrop-filter: brightness(0.7);
@@ -92,9 +94,11 @@ export const ModalAddEditTask: NextPage<CustomModalProps> = ({
           ],
         });
         console.log('create');
+
+        toast.success('Task created successfully');
       }
     } catch (error) {
-      console.log(error);
+      toast.error('Something went wrong');
     }
     console.log({ data, error, createData, createError });
   });
