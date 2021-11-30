@@ -9,15 +9,17 @@ export const EditDeleteMenu: NextPage<EditDeleteDropdownProps> = ({
   task: { id, dueDate, name, status, tags, pointEstimate },
 }) => {
   return (
-    <Dropdown.Root>
+    <Dropdown.Root onOpenChange={(open) => false}>
       <Dropdown.Trigger>{children}</Dropdown.Trigger>
       <Dropdown.Content>
-        <ModalAddEditTask
-          type="edit"
-          task={{ dueDate, id, name, pointEstimate, status, tags }}
-        >
-          Edit
-        </ModalAddEditTask>
+        <Dropdown.Item asChild>
+          <ModalAddEditTask
+            type="edit"
+            task={{ dueDate, id, name, pointEstimate, status, tags }}
+          >
+            Edit
+          </ModalAddEditTask>
+        </Dropdown.Item>
         <Dropdown.Item>Delete</Dropdown.Item>
       </Dropdown.Content>
     </Dropdown.Root>

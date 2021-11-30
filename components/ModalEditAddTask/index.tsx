@@ -73,6 +73,14 @@ export const ModalAddEditTask: NextPage<CustomModalProps> = ({
             },
           },
         });
+
+        toast.success('Task edited!', {
+          style: {
+            borderRadius: '20px',
+            background: '#333',
+            color: 'white',
+          },
+        });
       } else if (type === 'create') {
         await createTask({
           variables: {
@@ -85,7 +93,6 @@ export const ModalAddEditTask: NextPage<CustomModalProps> = ({
             },
           },
         });
-        console.log('create');
 
         toast.success('Task created successfully');
       }
@@ -104,6 +111,7 @@ export const ModalAddEditTask: NextPage<CustomModalProps> = ({
       <ModalContentStyled p={25} rounded={10}>
         <Dialog.Title>
           <SearchboxStyled
+            autoFocus={false}
             type={'text'}
             p={2}
             fontWeight="700"
@@ -115,26 +123,22 @@ export const ModalAddEditTask: NextPage<CustomModalProps> = ({
         </Dialog.Title>
 
         <Flex gap={16} alignItems="center" justifyContent="space-between">
-          <div>
-            <Flex direction="column">
-              <label htmlFor="points">
-                <Image src={'/icons/PlusMinusIcon.svg'} alt="" width={15} height={15} />
-                <span>Points</span>
-              </label>
-              <span {...setValue('pointEstimate', PointEstimate.EIGHT)}>
-                Hit me to select max points
-              </span>
-              <select id="points" {...register('pointEstimate')}>
-                {(Object.keys(PointEstimate) as Array<keyof typeof PointEstimate>)
-                  .reverse()
-                  .map((key, idx) => (
-                    <option key={idx} value={key}>
-                      {key} points
-                    </option>
-                  ))}
-              </select>
-            </Flex>
-          </div>
+          <Flex direction="column">
+            <label htmlFor="points">
+              <Image src={'/icons/PlusMinusIcon.svg'} alt="" width={15} height={15} />
+              <span>Points</span>
+            </label>
+            <select id="points" {...register('pointEstimate')}>
+              {(Object.keys(PointEstimate) as Array<keyof typeof PointEstimate>)
+                .reverse()
+                .map((key, idx) => (
+                  <option key={idx} value={key}>
+                    {key} points
+                  </option>
+                ))}
+            </select>
+          </Flex>
+
           <div>
             <span>Due Date</span>
             {new Date(task.dueDate).toLocaleDateString()}
@@ -144,16 +148,6 @@ export const ModalAddEditTask: NextPage<CustomModalProps> = ({
                 value: new Date(task.dueDate),
               })}
             />
-          </div>
-          <div onClick={() => setValue('tags', [TaskTag.React, TaskTag.NodeJs])}>
-            <span>React tag</span>
-          </div>
-          <div
-            onClick={() => {
-              setValue('status', Status.Todo);
-            }}
-          >
-            <span>todo</span>
           </div>
         </Flex>
 

@@ -16,10 +16,10 @@ export interface SearchBoxProps extends SelectorProps {
   fontWeight?: string;
   fontSize?: number;
 }
-export const SearchboxStyled = styled.input`
+export const SearchboxStyled = styled.input<SearchBoxProps>`
   width: 100%;
-  height: ${(props: SearchBoxProps) => (props.h ? `${props.h}px` : '60px')};
-  padding: ${(props: SearchBoxProps) =>
+  height: ${(props) => (props.h ? `${props.h}px` : '60px')};
+  padding: ${(props) =>
     props.p ? `${props.p}px` : 'padding-block: 22px;padding-left: 72px;'};
 
   // * Taking in mind the icon
@@ -28,9 +28,10 @@ export const SearchboxStyled = styled.input`
   color: ${({ theme }: { theme: ThemeProperties }) => theme.accentText};
   font-weight: ${(props) => props.fontWeight};
   font-size: ${(props) => props.fontSize}px;
+  user-select: none;
 
-  &:focus-within {
-    color: ${({ theme }: { theme: ThemeProperties }) => theme.mainText};
+  &:focus {
     outline: none;
+    user-select: none;
   }
 `;
