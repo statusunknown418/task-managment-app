@@ -1,7 +1,6 @@
 # This will show whenever new dependencies are added
 name: Inspect dependencies
 on:
-  - deployment
   - push
 
 jobs:
