@@ -90,7 +90,7 @@ export const ModalAddEditTask: NextPage<CustomModalProps> = ({
     console.log({ data, error, createData, createError });
   });
 
-  // console.log({ task });
+  console.log(new Date(task.dueDate).toISOString());
 
   return (
     <Dialog.Root>
