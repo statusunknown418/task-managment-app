@@ -27,7 +27,11 @@ export const TaskWrapper: NextPage<{ sectionTitle: string }> = ({ sectionTitle }
       style={{ minWidth: '100%' }}
     >
       <h3 style={{ textTransform: 'capitalize' }}>
-        {sectionTitle.replace(/[^a-zA-Z+$]/, ' ')} (0{tasks?.tasks.length})
+        {sectionTitle.replace(/[^a-zA-Z+$]/, ' ')} (
+        {tasks && tasks.tasks.length > 9
+          ? tasks?.tasks.length
+          : `0${tasks?.tasks.length}`}
+        )
       </h3>
       <Flex
         direction="column"

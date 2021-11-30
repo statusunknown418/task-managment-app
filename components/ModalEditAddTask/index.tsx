@@ -33,7 +33,7 @@ export const OverlayStyled = styled(Dialog.Overlay)`
 
 export interface CustomModalProps {
   task: Partial<Task>;
-  type: 'create' | 'edit';
+  type?: 'create' | 'edit';
 }
 
 interface MutationData {
@@ -158,10 +158,10 @@ export const ModalAddEditTask: NextPage<CustomModalProps> = ({
           </div>
           <div
             onClick={() => {
-              setValue('status', Status.InProgress);
+              setValue('status', Status.Todo);
             }}
           >
-            <span>in progress status</span>
+            <span>todo</span>
           </div>
         </Flex>
 

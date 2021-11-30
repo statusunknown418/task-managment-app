@@ -7,9 +7,10 @@ import { DueDateCard } from '../DueDateCard';
 import dynamic from 'next/dynamic';
 import { spriteTypes, UserAvatar } from '../../UserAvatar';
 import { TagStyled } from '../Tags';
+import { EditDeleteDropdownProps } from './EditDeleteMenu';
 
-const DynamicModalAddEditTask = dynamic<CustomModalProps>(
-  () => import('../../ModalEditAddTask').then((mod) => mod.ModalAddEditTask),
+const DynamicEditDeleteDropdown = dynamic<EditDeleteDropdownProps>(
+  () => import('./EditDeleteMenu').then((mod) => mod.EditDeleteMenu),
   { ssr: false }
 );
 
@@ -40,12 +41,9 @@ export const TaskCard: NextPage<Props> = ({
     >
       <Flex alignItems="center" justifyContent="space-between">
         <p style={{ fontWeight: 'bolder' }}>{name}</p>
-        <DynamicModalAddEditTask
-          type="edit"
-          task={{ dueDate, name, tags, pointEstimate, id }}
-        >
+        <DynamicEditDeleteDropdown task={{ dueDate, name, tags, pointEstimate, id }}>
           <DotsHorizontalIcon />
-        </DynamicModalAddEditTask>
+        </DynamicEditDeleteDropdown>
       </Flex>
 
       <Flex alignItems="center" justifyContent="space-between" mt={10}>
