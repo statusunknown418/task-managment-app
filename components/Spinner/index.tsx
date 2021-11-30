@@ -1,24 +1,23 @@
+import { NextPage } from 'next';
 import styled from 'styled-components';
 import { ThemeProperties } from '../../styles/theme.config';
 
-export const Spinner = () => (
-  <StyledSpinner viewBox="0 0 50 50">
-    <circle
-      className="path"
-      cx="25"
-      cy="25"
-      r="10"
-      fill="none"
-      strokeWidth="2"
-    />
+export const Spinner: NextPage<SpinnerProps> = ({ height, width }) => (
+  <StyledSpinner viewBox="0 0 50 50" width={width} height={height}>
+    <circle className="path" cx="25" cy="25" r="10" fill="none" strokeWidth="2" />
   </StyledSpinner>
 );
 
-const StyledSpinner = styled.svg`
+interface SpinnerProps {
+  width?: number;
+  height?: number;
+}
+
+const StyledSpinner = styled.svg<SpinnerProps>`
   animation: rotate 2s linear infinite;
   place-self: center;
-  width: 40px;
-  height: 40px;
+  width: ${(props) => (props.width ? props.width : '50px')};
+  height: ${(props) => (props.height ? props.height : '50px')};
 
   & .path {
     stroke: ${({ theme }: { theme: ThemeProperties }) => theme.primaryClrRed};

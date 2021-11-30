@@ -152,7 +152,7 @@ export const ModalAddEditTask: NextPage<CustomModalProps> = ({
           <ModalCloseStyled
             p={8}
             variant="primary"
-            onClick={() => handleSubmit((data) => console.log(data))}
+            onClick={() => onSubmitHandler()}
             type="submit"
           >
             {type}
