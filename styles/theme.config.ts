@@ -44,11 +44,13 @@ export const customTheme = {
   secondaryBgGreen: '#333c36',
   tertiaryBgYellow: '#3e3c36',
   quaternaryBgBlue: '#38424d',
+  extraBgPurple: '#5b3e72',
 
   primaryClrRed: '#DA584B',
   secondaryClrGreen: '#70B252',
   tertiaryClrYellow: '#E5B454',
   quaternaryClrBlue: '#548ADB',
+  extraClrPurple: '#CF5DF8',
 
   // Typography
   primaryFontSize: '15px',

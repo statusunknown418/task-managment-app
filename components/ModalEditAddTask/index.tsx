@@ -10,9 +10,14 @@ import { ModalContentStyled } from './ModalContent.styled';
 import { ModalTriggerStyled } from './ModalTrigger.styled';
 import {
   PointEstimate,
+  Scalars,
+  Status,
+  TaskTag,
+  useCreateTaskMutation,
   useUpdateTaskMutation,
 } from '../../__generated__/graphql-remastered';
 import { useForm } from 'react-hook-form';
+import { Spinner } from '../Spinner';
 
 export const OverlayStyled = styled(Dialog.Overlay)`
   backdrop-filter: brightness(0.7);
@@ -27,33 +32,66 @@ export interface CustomModalProps {
   task: Partial<Task>;
   type: 'create' | 'edit';
 }
+
+interface MutationData {
+  name: Scalars['String'];
+  pointEstimate: PointEstimate;
+  position: Scalars['Float'];
+  status: Status;
+  tags: Array<TaskTag>;
+  dueDate: Date;
+}
+
 export const ModalAddEditTask: NextPage<CustomModalProps> = ({
   children,
   type,
   task,
 }) => {
-  interface MutationData {
-    taskName: string;
-    points: number;
-  }
   const [updateTask, { data, error, loading }] = useUpdateTaskMutation();
+  const [createTask, { data: createData, error: createError, loading: createLoading }] =
+    useCreateTaskMutation();
+
   const { register, setValue, handleSubmit } = useForm<MutationData>();
 
   const onSubmitHandler = handleSubmit(async (data) => {
-    const { taskName, points } = data;
-    await updateTask({
-      variables: {
-        updateTaskInput: {
-          id: task.id,
-          name: taskName,
-          pointEstimate: PointEstimate.EIGHT,
-        },
-      },
-    });
-    console.log({ data, error });
+    const { name, pointEstimate, dueDate, status, tags } = data;
+    try {
+      if (type === 'edit') {
+        await updateTask({
+          variables: {
+            updateTaskInput: {
+              id: task.id,
+              name,
+              dueDate,
+              pointEstimate: pointEstimate.toString() && pointEstimate.toString(),
+              tags,
+              status,
+            },
+          },
+        });
+      } else if (type === 'create') {
+        await createTask({
+          variables: {
+            createTaskInput: {
+              dueDate,
+              name,
+              pointEstimate,
+              status,
+              tags,
+            },
+          },
+        });
+        console.log('create');
+      }
+    } catch (error) {
+      console.log(error);
+    }
+    console.log({ data, error, createData, createError });
   });
 
-  return (
+  console.log({ task });
+
+  return !createLoading || !loading ? (
     <Dialog.Root>
       <OverlayStyled />
       <ModalTriggerStyled>{children}</ModalTriggerStyled>
@@ -64,28 +102,64 @@ export const ModalAddEditTask: NextPage<CustomModalProps> = ({
             type={'text'}
             p={2}
             fontWeight="700"
-            placeholder={task.name || 'Task name'}
+            placeholder={task.name || 'New task name'}
             fontSize={17}
             height={20}
-            {...register('taskName', { required: true })}
+            {...register('name', { required: true })}
           />
         </Dialog.Title>
 
         <Flex gap={16} alignItems="center" justifyContent="space-between">
           <div>
-            <Flex>
-              <Image src={'/icons/PlusMinusIcon.svg'} alt="" width={15} height={15} />
+            <Flex direction="column">
+              <label htmlFor="points">
+                <Image src={'/icons/PlusMinusIcon.svg'} alt="" width={15} height={15} />
+                <span>Points</span>
+              </label>
+              <span {...setValue('pointEstimate', PointEstimate.EIGHT)}>
+                Hit me to select max points
+              </span>
+              <select id="points" {...register('pointEstimate')}>
+                {(Object.keys(PointEstimate) as Array<keyof typeof PointEstimate>)
+                  .reverse()
+                  .map((key, idx) => (
+                    <option key={idx} value={key}>
+                      {key} points
+                    </option>
+                  ))}
+              </select>
             </Flex>
+          </div>
+          <div>
+            <span>Due Date</span>
+            <input type="date" {...register('dueDate', { required: true })} />
+          </div>
+          <div onClick={() => setValue('tags', [TaskTag.React, TaskTag.NodeJs])}>
+            <span>React tag</span>
+          </div>
+          <div
+            onClick={() => {
+              setValue('status', Status.InProgress);
+            }}
+          >
+            <span>in progress status</span>
           </div>
         </Flex>
 
         <Flex gap={24} alignItems="center">
           <ModalCloseStyled p={8}>Cancel</ModalCloseStyled>
-          <ModalCloseStyled p={8} onClick={() => onSubmitHandler()} type="submit">
+          <ModalCloseStyled
+            p={8}
+            variant="primary"
+            onClick={() => onSubmitHandler()}
+            type="submit"
+          >
             {type}
           </ModalCloseStyled>
         </Flex>
       </ModalContentStyled>
     </Dialog.Root>
+  ) : (
+    <Spinner />
   );
 };

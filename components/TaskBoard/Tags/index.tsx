@@ -11,7 +11,7 @@ export const TagStyled = styled.div<TagProps>`
   padding-block: 0.5rem;
   padding-inline: 1rem;
   border-radius: 5px;
-
+  font-weight: 500;
   ${(props) =>
     props.tag === 'REACT' &&
     `background-color: ${props.theme.quaternaryBgBlue};
@@ -27,6 +27,11 @@ export const TagStyled = styled.div<TagProps>`
     `background-color: ${props.theme.tertiaryBgYellow};
     color: ${props.theme.tertiaryClrYellow};`}
 
+  ${(props) =>
+    props.tag === 'NODE_JS' &&
+    `background-color: ${props.theme.extraBgPurple};
+    color: ${props.theme.extraClrPurple};`}
+    
 
   ${(props) =>
     props.tag === 'RAILS' &&

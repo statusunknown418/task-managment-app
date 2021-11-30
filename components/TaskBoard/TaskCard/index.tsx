@@ -17,7 +17,7 @@ interface Props {
   task: Partial<Task>;
 }
 
-enum pointsEnum {
+export enum pointsEnum {
   EIGHT = '8',
   FOUR = '4',
   ONE = '1',
@@ -28,6 +28,7 @@ enum pointsEnum {
 export const TaskCard: NextPage<Props> = ({
   task: { id, dueDate, name, tags, pointEstimate, owner },
 }) => {
+  console.log(pointEstimate);
   return (
     <Flex
       isCard
