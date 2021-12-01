@@ -12,5 +12,5 @@ export const ModalTriggerStyled = styled(DialogTrigger)<ExtendedDialogTriggerPro
   padding: ${({ p }) => p}px;
   border-radius: ${({ rounded }) => rounded}px;
   background-color: ${(props) => (props.bgColor ? props.bgColor : 'transparent')};
-  color: ${(props) => (props.triggerColor ? props.triggerColor : props.theme.accentText)};
+  color: ${(props) => (props.triggerColor ? props.triggerColor : props.theme.mainText)};
 `;

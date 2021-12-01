@@ -102,11 +102,10 @@ export const ModalAddEditTask: NextPage<CustomModalProps> = ({
     console.log({ data, error, createData, createError });
   });
 
-  console.log({ 'from api': task.dueDate });
   return (
     <Dialog.Root>
       <OverlayStyled />
-      <ModalTriggerStyled>{children}</ModalTriggerStyled>
+      <ModalTriggerStyled p={4}>{children}</ModalTriggerStyled>
 
       <ModalContentStyled p={25} rounded={10}>
         <Dialog.Title>
