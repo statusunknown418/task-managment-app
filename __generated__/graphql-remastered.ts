@@ -30,7 +30,7 @@ export type CreateTaskInput = {
 };
 
 export type DeleteTaskInput = {
-  id: Scalars['String'];
+  id: Scalars['String'] | undefined;
 };
 
 export type FilterTaskInput = {
