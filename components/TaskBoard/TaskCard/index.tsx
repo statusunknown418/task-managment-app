@@ -1,6 +1,6 @@
 import { DotsHorizontalIcon } from '@radix-ui/react-icons';
 import { NextPage } from 'next';
-import { Task } from '../../../__generated__/graphql-schema-generated';
+import { Task } from '../../../__generated__/graphql-improved';
 import { Flex } from '../../Flex';
 import { CustomModalProps } from '../../ModalEditAddTask';
 import { DueDateCard } from '../DueDateCard';

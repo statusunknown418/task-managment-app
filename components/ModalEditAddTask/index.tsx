@@ -3,23 +3,24 @@ import styled from 'styled-components';
 import * as Dialog from '@radix-ui/react-dialog';
 import { SearchboxStyled } from '../Searchbox/Searchbox.styled';
 import { Flex } from '../Flex';
-import { Task } from '../../__generated__/graphql-schema-generated';
+import {
+  GetAllTasksByStatusDocument,
+  Task,
+  useGetAllTasksByStatusQuery,
+} from '../../__generated__/graphql-improved';
 import Image from 'next/image';
 import { ModalCloseStyled } from './ModalClose.styled';
 import { ModalContentStyled } from './ModalContent.styled';
 import { ModalTriggerStyled } from './ModalTrigger.styled';
 import {
-  GetAllTaskStatusDocument,
   PointEstimate,
   Scalars,
   Status,
   TaskTag,
   useCreateTaskMutation,
   useUpdateTaskMutation,
-} from '../../__generated__/graphql-remastered';
+} from '../../__generated__/graphql-improved';
 import { useForm } from 'react-hook-form';
-import { Spinner } from '../Spinner';
-import { useFixedToast } from '../../utils/hooks/useFixedToast';
 import toast from 'react-hot-toast';
 
 export const OverlayStyled = styled(Dialog.Overlay)`
@@ -51,9 +52,8 @@ export const ModalAddEditTask: NextPage<CustomModalProps> = ({
   task,
 }) => {
   // TODO - refactor this
-  const [updateTask, { data, error, loading }] = useUpdateTaskMutation();
-  const [createTask, { data: createData, error: createError, loading: createLoading }] =
-    useCreateTaskMutation();
+  const [updateTask, { data, error }] = useUpdateTaskMutation();
+  const [createTask, { data: createData, error: createError }] = useCreateTaskMutation();
 
   const { register, setValue, handleSubmit } = useForm<MutationData>();
 
@@ -88,17 +88,21 @@ export const ModalAddEditTask: NextPage<CustomModalProps> = ({
               dueDate,
               name,
               pointEstimate,
-              status,
-              tags,
+              status: Status.Backlog,
+              tags: [TaskTag.Rails, TaskTag.React],
             },
           },
+          refetchQueries: [GetAllTasksByStatusDocument],
         });
 
         toast.success('Task created successfully');
+        // not permanent solution
+        window.location.reload();
       }
     } catch (error) {
       toast.error('Something went wrong');
     }
+
     console.log({ data, error, createData, createError });
   });
 

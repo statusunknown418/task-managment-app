@@ -1,7 +1,9 @@
 import { useQuery } from '@apollo/client';
 import { NextPage } from 'next';
+import { useEffect, useState } from 'react';
+import toast from 'react-hot-toast';
 import { getTaskByStatus } from '../../../graphql/queries/getTaskByStatus';
-import { Query } from '../../../__generated__/graphql-schema-generated';
+import { Query, Task } from '../../../__generated__/graphql-improved';
 import { Flex } from '../../Flex';
 import { Spinner } from '../../Spinner';
 import { TaskCard } from '../TaskCard';
@@ -18,6 +20,21 @@ export const TaskWrapper: NextPage<{ sectionTitle: string }> = ({ sectionTitle }
       },
     },
   });
+
+  const [allTasks, setAllTasks] = useState<Array<Task>>([]);
+
+  useEffect(() => {
+    tasks && setAllTasks(tasks.tasks);
+  }, [tasks]);
+
+  error &&
+    toast.error('Where are the tasks? ...', {
+      style: {
+        backgroundColor: '#300e0c',
+        color: '#fff',
+        borderRadius: '20px',
+      },
+    });
 
   return (
     <Flex
@@ -40,9 +57,7 @@ export const TaskWrapper: NextPage<{ sectionTitle: string }> = ({ sectionTitle }
         style={{ minWidth: '100%' }}
       >
         {loading && <Spinner />}
-        {tasks?.tasks.map((task) => (
-          <TaskCard key={task.id} task={task} />
-        ))}
+        {allTasks && allTasks.map((task) => <TaskCard key={task.id} task={task} />)}
       </Flex>
     </Flex>
   );

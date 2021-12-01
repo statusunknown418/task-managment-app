@@ -4,7 +4,10 @@ import { NextPage } from 'next';
 import toast from 'react-hot-toast';
 import styled from 'styled-components';
 import { ThemeProperties } from '../../../../styles/theme.config';
-import { useDeleteTaskByIdMutation } from '../../../../__generated__/graphql-remastered';
+import {
+  GetAllTaskStatusDocument,
+  useDeleteTaskByIdMutation,
+} from '../../../../__generated__/graphql-remastered';
 import { Flex } from '../../../Flex';
 import { CustomModalProps, ModalAddEditTask } from '../../../ModalEditAddTask';
 
@@ -37,6 +40,7 @@ export const EditDeleteMenu: NextPage<EditDeleteDropdownProps> = ({
     try {
       toast.loading('Deleting task...', { duration: 500 });
       await deleteTask({
+        refetchQueries: [GetAllTaskStatusDocument, 'getAllTasks'],
         variables: {
           deleteTaskInput: {
             id,
@@ -51,7 +55,15 @@ export const EditDeleteMenu: NextPage<EditDeleteDropdownProps> = ({
         },
       });
     } catch (error) {
-      toast.error('Error deleting task ...');
+      toast.error('Error deleting task ...', {
+        duration: 500,
+        style: {
+          backgroundColor: '#411f1f',
+          color: '#fff',
+        },
+      });
+    } finally {
+      window.location.reload();
     }
   };
 
@@ -60,7 +72,7 @@ export const EditDeleteMenu: NextPage<EditDeleteDropdownProps> = ({
       <Dropdown.Trigger>{children}</Dropdown.Trigger>
       <DropDownContentStyled>
         <DropDownItemStyled asChild>
-          <div>
+          <>
             <ModalAddEditTask
               type="edit"
               task={{ dueDate, id, name, pointEstimate, status, tags }}
@@ -72,7 +84,7 @@ export const EditDeleteMenu: NextPage<EditDeleteDropdownProps> = ({
                 <p>Edit</p>
               </Flex>
             </ModalAddEditTask>
-          </div>
+          </>
         </DropDownItemStyled>
         <DropDownItemStyled asChild onClick={handleDeleteTask}>
           <div>
