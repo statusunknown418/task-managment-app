@@ -3,11 +3,7 @@ import styled from 'styled-components';
 import * as Dialog from '@radix-ui/react-dialog';
 import { SearchboxStyled } from '../Searchbox/Searchbox.styled';
 import { Flex } from '../Flex';
-import {
-  GetAllTasksByStatusDocument,
-  Task,
-  useGetAllTasksByStatusQuery,
-} from '../../__generated__/graphql-improved';
+import { GetAllTasksByStatusDocument, Task } from '../../__generated__/graphql-improved';
 import Image from 'next/image';
 import { ModalCloseStyled } from './ModalClose.styled';
 import { ModalContentStyled } from './ModalContent.styled';
@@ -22,6 +18,12 @@ import {
 } from '../../__generated__/graphql-improved';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
+import {
+  DropDownContentStyled,
+  DropDownItemStyled,
+  DropDownTriggerStyled,
+} from '../TaskBoard/TaskCard/EditDeleteMenu';
+import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 
 export const OverlayStyled = styled(Dialog.Overlay)`
   backdrop-filter: brightness(0.7);
@@ -127,19 +129,23 @@ export const ModalAddEditTask: NextPage<CustomModalProps> = ({
 
         <Flex gap={16} alignItems="center" justifyContent="space-between">
           <Flex direction="column">
-            <label htmlFor="points">
-              <Image src={'/icons/PlusMinusIcon.svg'} alt="" width={15} height={15} />
-              <span>Points</span>
-            </label>
-            <select id="points" {...register('pointEstimate')}>
-              {(Object.keys(PointEstimate) as Array<keyof typeof PointEstimate>)
-                .reverse()
-                .map((key, idx) => (
-                  <option key={idx} value={key}>
-                    {key} points
-                  </option>
-                ))}
-            </select>
+            <DropdownMenu.Root>
+              <DropdownMenu.Trigger>Points</DropdownMenu.Trigger>
+              <DropdownMenu.Content>
+                <div>
+                  {(Object.keys(PointEstimate) as Array<keyof typeof PointEstimate>)
+                    .reverse()
+                    .map((key, idx) => (
+                      <DropDownItemStyled
+                        key={idx}
+                        onClick={() => setValue('pointEstimate', PointEstimate[key])}
+                      >
+                        {key} points
+                      </DropDownItemStyled>
+                    ))}
+                </div>
+              </DropdownMenu.Content>
+            </DropdownMenu.Root>
           </Flex>
 
           <div>

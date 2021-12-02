@@ -3,13 +3,20 @@ import { Pencil1Icon, TrashIcon } from '@radix-ui/react-icons';
 import { NextPage } from 'next';
 import toast from 'react-hot-toast';
 import styled from 'styled-components';
-import { ThemeProperties } from '../../../../styles/theme.config';
 import {
   GetAllTaskStatusDocument,
   useDeleteTaskByIdMutation,
 } from '../../../../__generated__/graphql-remastered';
 import { Flex } from '../../../Flex';
 import { CustomModalProps, ModalAddEditTask } from '../../../ModalEditAddTask';
+import dynamic from 'next/dynamic';
+
+const DynamicAddEditModal = dynamic<CustomModalProps>(
+  () => import('../../../ModalEditAddTask').then((mod) => mod.ModalAddEditTask),
+  {
+    ssr: false,
+  }
+);
 
 export interface EditDeleteDropdownProps extends CustomModalProps {}
 
@@ -28,6 +35,15 @@ export const DropDownContentStyled = styled(Dropdown.DropdownMenuContent)`
 export const DropDownItemStyled = styled(Dropdown.DropdownMenuItem)`
   outline: none;
   cursor: pointer;
+`;
+
+export const DropDownTriggerStyled = styled(
+  Dropdown.DropdownMenuTrigger
+)<Dropdown.DropdownMenuTriggerProps>`
+  outline: none;
+  cursor: pointer;
+  background-color: ${(props) => props.theme.accentBg};
+  color: ${(props) => props.theme.accentText};
 `;
 
 export const EditDeleteMenu: NextPage<EditDeleteDropdownProps> = ({
@@ -69,22 +85,20 @@ export const EditDeleteMenu: NextPage<EditDeleteDropdownProps> = ({
 
   return (
     <Dropdown.Root>
-      <Dropdown.Trigger>{children}</Dropdown.Trigger>
-      <DropDownContentStyled>
+      <DropDownTriggerStyled>{children}</DropDownTriggerStyled>
+      <DropDownContentStyled sideOffset={-30}>
         <DropDownItemStyled asChild>
-          <>
-            <ModalAddEditTask
-              type="edit"
-              task={{ dueDate, id, name, pointEstimate, status, tags }}
-            >
-              <Flex gap={10} alignItems="center" justifyContent="space-between">
-                <span>
-                  <Pencil1Icon />
-                </span>
-                <p>Edit</p>
-              </Flex>
-            </ModalAddEditTask>
-          </>
+          <DynamicAddEditModal
+            type="edit"
+            task={{ dueDate, id, name, pointEstimate, status, tags }}
+          >
+            <Flex gap={10}>
+              <span>
+                <Pencil1Icon />
+              </span>
+              <p>Edit</p>
+            </Flex>
+          </DynamicAddEditModal>
         </DropDownItemStyled>
         <DropDownItemStyled asChild onClick={handleDeleteTask}>
           <div>
