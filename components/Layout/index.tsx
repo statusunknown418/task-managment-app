@@ -1,8 +1,5 @@
 import { NextPage } from 'next';
-import { SearchBox } from '../Searchbox';
-import { Sidebar } from '../SideBar';
-import { TaskNavbar } from '../TaskNavbar';
-import { LayoutStyled } from './Layout.styled';
+import { LayoutStyled, SearchBox, Sidebar, TaskNavbar } from '../exports';
 
 export const Layout: NextPage = ({ children }) => {
   return (

@@ -1,10 +1,9 @@
 import { NextPage } from 'next';
 import * as Dialog from '@radix-ui/react-dialog';
 import { BellIcon } from '@radix-ui/react-icons';
-import { TriggerStyled } from './Trigger.styled';
-import { ContentStyled } from './Content.styled';
 import { ThemeProperties } from '../../styles/theme.config';
 import styled from 'styled-components';
+import { ContentStyled, TriggerStyled } from '../exports';
 
 const PStyled = styled.p`
   color: ${({ theme }: { theme: ThemeProperties }) => theme.accentText};

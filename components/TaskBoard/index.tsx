@@ -2,9 +2,7 @@ import { useQuery } from '@apollo/client';
 import { NextPage } from 'next';
 import { useFixedToast } from '../../utils/hooks/useFixedToast';
 import { useGetAllTaskStatusQuery } from '../../__generated__/graphql-remastered';
-import { Spinner } from '../Spinner';
-import { ContainerStyled } from './TasksContainer.styled';
-import { TaskWrapper } from './TaskWrapper';
+import { ContainerStyled, Spinner, TaskWrapper } from '../exports';
 
 export const TaskBoard: NextPage = () => {
   const {

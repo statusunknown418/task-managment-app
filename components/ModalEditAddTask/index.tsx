@@ -1,8 +1,5 @@
 import { NextPage } from 'next';
 import styled from 'styled-components';
-import * as Dialog from '@radix-ui/react-dialog';
-import { SearchboxStyled } from '../Searchbox/Searchbox.styled';
-import { Flex } from '../Flex';
 import {
   GetAllTasksByStatusDocument,
   PointEstimate,
@@ -13,59 +10,26 @@ import {
   useUpdateTaskMutation,
   Task,
 } from '../../__generated__/graphql-remastered';
-import { ModalCloseStyled } from './ModalClose.styled';
-import { ModalContentStyled } from './ModalContent.styled';
-import { ModalTriggerStyled } from './ModalTrigger.styled';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
-import { useState } from 'react';
-import * as Dropdown from '@radix-ui/react-dropdown-menu';
-
-export const PointSelect = styled.select`
-  font-style: normal;
-  font-weight: 600;
-  font-size: 15px;
-  line-height: 24px;
-  display: flex;
-  align-items: center;
-  letter-spacing: 0.75px;
-  background-color: #42464a;
-  padding: 0.4rem;
-  border-radius: 8px;
-  color: #ffffff;
-`;
+import * as Dialog from '@radix-ui/react-dialog';
+import {
+  Flex,
+  ModalCloseStyled,
+  ModalContentStyled,
+  ModalTriggerStyled,
+  OptionStyled,
+  SearchboxStyled,
+  SelectStyled,
+} from '../exports';
 
 export const DatePickerStyled = styled.input`
-  background-color: ${(props) => props.theme.accentBg};
+  background-color: #42464a;
   color: white;
   cursor: pointer;
   box-sizing: border-box;
-  border: 1px solid ${(props) => props.theme.accentText};
   border-radius: 8px;
   padding: 0.5rem;
-`;
-
-export const Points = styled.option`
-  font-style: normal;
-  font-weight: 600;
-  font-size: 15px;
-  line-height: 24px;
-  display: flex;
-  align-items: center;
-  letter-spacing: 0.75px;
-  background-color: #42464a;
-  padding: 0.4rem;
-  border-radius: 8px;
-  color: #ffffff;
-`;
-
-export const TimeInfo = styled.div`
-  display: flex;
-  max-height: 32px;
-  width: 100%;
-  flex-basis: 100%;
-  justify-content: space-between;
-  align-items: center;
 `;
 
 export const OverlayStyled = styled(Dialog.Overlay)`
@@ -128,42 +92,35 @@ export const ModalAddEditTask: NextPage<CustomModalProps> = ({
           justifyContent="space-between"
           style={{ position: 'relative' }}
         >
-          <TimeInfo>{task.pointEstimate ? task.pointEstimate : 'Set'} points</TimeInfo>
+          <SelectStyled name="estimate" id="estimate" defaultValue={'estimate'}>
+            <OptionStyled value="estimate">Estimate</OptionStyled>
+            {Object.values(PointEstimate).map((point) => (
+              <OptionStyled key={point} {...register('pointEstimate', { value: point })}>
+                {point}
+              </OptionStyled>
+            ))}
+          </SelectStyled>
+
+          <SelectStyled name="estimate" id="estimate" defaultValue={'estimate'}>
+            <OptionStyled value="asignee">Asignee</OptionStyled>
+            {Object.values(PointEstimate).map((point) => (
+              <OptionStyled key={point} {...register('pointEstimate', { value: point })}>
+                {point}
+              </OptionStyled>
+            ))}
+          </SelectStyled>
 
           <div>
             <DatePickerStyled
               type="date"
-              {...register('dueDate', { required: true, value: task.dueDate })}
+              {...register('dueDate', {
+                required: true,
+                value: new Date(),
+              })}
               placeholder={task.dueDate}
             />
           </div>
         </Flex>
-        <label htmlFor="estimate">Estimate</label>
-        <PointSelect name="estimate" id="estimate">
-          {Object.values(PointEstimate).map((point) => (
-            <Points key={point} {...register('pointEstimate', { value: point })}>
-              {point}
-            </Points>
-          ))}
-        </PointSelect>
-
-        <Dropdown.Root modal>
-          <Dropdown.Trigger>
-            <Points>{task.pointEstimate} Estimate</Points>
-          </Dropdown.Trigger>
-          <Dropdown.Content>
-            {Object.values(PointEstimate).map((point) => (
-              <Dropdown.Item
-                key={point}
-                onClick={() => {
-                  setValue('pointEstimate', point);
-                }}
-              >
-                {point}
-              </Dropdown.Item>
-            ))}
-          </Dropdown.Content>
-        </Dropdown.Root>
 
         <Flex gap={24} alignItems="center">
           <ModalCloseStyled p={8}>Cancel</ModalCloseStyled>

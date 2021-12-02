@@ -1,10 +1,8 @@
 import { NextPage } from 'next';
-import { SearchboxStyled } from './Searchbox.styled';
-import { IconStyled } from './IconSidebar.styled';
 import { MagnifyingGlassIcon } from '@radix-ui/react-icons';
-import { DialogMenuProps } from '../NotificationDialogMenu';
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
+import { DialogMenuProps, IconStyled, SearchboxStyled } from '../exports';
 
 const DynamicDialogMenu = dynamic<DialogMenuProps>(
   () => import('../NotificationDialogMenu/index').then((mod) => mod.DialogMenu),
