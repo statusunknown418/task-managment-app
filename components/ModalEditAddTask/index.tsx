@@ -4,7 +4,6 @@ import * as Dialog from '@radix-ui/react-dialog';
 import { SearchboxStyled } from '../Searchbox/Searchbox.styled';
 import { Flex } from '../Flex';
 import { GetAllTasksByStatusDocument, Task } from '../../__generated__/graphql-improved';
-import Image from 'next/image';
 import { ModalCloseStyled } from './ModalClose.styled';
 import { ModalContentStyled } from './ModalContent.styled';
 import { ModalTriggerStyled } from './ModalTrigger.styled';
@@ -18,12 +17,8 @@ import {
 } from '../../__generated__/graphql-improved';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
-import {
-  DropDownContentStyled,
-  DropDownItemStyled,
-  DropDownTriggerStyled,
-} from '../TaskBoard/TaskCard/EditDeleteMenu';
-import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
+import { useState } from 'react';
+import * as Dropdown from '@radix-ui/react-dropdown-menu';
 
 export const OverlayStyled = styled(Dialog.Overlay)`
   backdrop-filter: brightness(0.7);
@@ -56,7 +51,7 @@ export const ModalAddEditTask: NextPage<CustomModalProps> = ({
   // TODO - refactor this
   const [updateTask, { data, error }] = useUpdateTaskMutation();
   const [createTask, { data: createData, error: createError }] = useCreateTaskMutation();
-
+  const [show, setShow] = useState(false);
   const { register, setValue, handleSubmit } = useForm<MutationData>();
 
   const onSubmitHandler = handleSubmit(async (data) => {
@@ -68,8 +63,8 @@ export const ModalAddEditTask: NextPage<CustomModalProps> = ({
             updateTaskInput: {
               id: task.id,
               name,
-              dueDate: new Date(dueDate),
-              pointEstimate: pointEstimate.toString() && pointEstimate.toString(),
+              dueDate,
+              pointEstimate,
               tags,
               status,
             },
@@ -127,36 +122,30 @@ export const ModalAddEditTask: NextPage<CustomModalProps> = ({
           />
         </Dialog.Title>
 
-        <Flex gap={16} alignItems="center" justifyContent="space-between">
-          <Flex direction="column">
-            <DropdownMenu.Root>
-              <DropdownMenu.Trigger>Points</DropdownMenu.Trigger>
-              <DropdownMenu.Content>
-                <div>
-                  {(Object.keys(PointEstimate) as Array<keyof typeof PointEstimate>)
-                    .reverse()
-                    .map((key, idx) => (
-                      <DropDownItemStyled
-                        key={idx}
-                        onClick={() => setValue('pointEstimate', PointEstimate[key])}
-                      >
-                        {key} points
-                      </DropDownItemStyled>
-                    ))}
-                </div>
-              </DropdownMenu.Content>
-            </DropdownMenu.Root>
-          </Flex>
-
+        <Flex
+          gap={16}
+          alignItems="center"
+          justifyContent="space-between"
+          style={{ position: 'relative' }}
+        >
+          <Dropdown.Root>
+            <Dropdown.Trigger>{children}</Dropdown.Trigger>
+            <Dropdown.Content>
+              {Object.values(PointEstimate).map((point) => (
+                <Dropdown.Item
+                  key={point}
+                  onClick={() => {
+                    setValue('pointEstimate', point);
+                  }}
+                >
+                  {point}
+                </Dropdown.Item>
+              ))}
+            </Dropdown.Content>
+          </Dropdown.Root>
           <div>
             <span>Due Date</span>
-            {new Date(task.dueDate).toLocaleDateString()}
-            <input
-              type="date"
-              {...register('dueDate', {
-                value: new Date(task.dueDate),
-              })}
-            />
+            <input type="date" {...register('dueDate', { required: true })} />
           </div>
         </Flex>
 
