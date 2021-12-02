@@ -17,7 +17,4 @@ export const ModalContentStyled = styled(DialogContent)<ExtendedModalContentProp
   padding: ${({ p }) => p}px;
   background-color: ${(props) => props.theme.accentBg};
   border-radius: ${({ rounded }) => rounded}px;
-  &:focus {
-    outline: none;
-  }
 `;

@@ -40,7 +40,10 @@ export const TaskCard: NextPage<Props> = ({
     >
       <Flex alignItems="center" justifyContent="space-between">
         <p style={{ fontWeight: 'bolder' }}>{name}</p>
-        <DynamicEditDeleteDropdown task={{ dueDate, name, tags, pointEstimate, id }}>
+        <DynamicEditDeleteDropdown
+          task={{ dueDate, name, tags, pointEstimate, id }}
+          type="edit"
+        >
           <DotsHorizontalIcon />
         </DynamicEditDeleteDropdown>
       </Flex>
