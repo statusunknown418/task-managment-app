@@ -3,7 +3,7 @@ import { NextPage } from 'next';
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { getTaskByStatus } from '../../../graphql/queries/getTaskByStatus';
-import { Query, Task } from '../../../__generated__/graphql-improved';
+import { Query, Task } from '../../../__generated__/graphql-remastered';
 import { Flex } from '../../Flex';
 import { Spinner } from '../../Spinner';
 import { TaskCard } from '../TaskCard';

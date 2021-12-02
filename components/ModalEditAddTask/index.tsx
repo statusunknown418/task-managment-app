@@ -3,18 +3,19 @@ import styled from 'styled-components';
 import * as Dialog from '@radix-ui/react-dialog';
 import { SearchboxStyled } from '../Searchbox/Searchbox.styled';
 import { Flex } from '../Flex';
-import { GetAllTasksByStatusDocument, Task } from '../../__generated__/graphql-improved';
-import { ModalCloseStyled } from './ModalClose.styled';
-import { ModalContentStyled } from './ModalContent.styled';
-import { ModalTriggerStyled } from './ModalTrigger.styled';
 import {
+  GetAllTasksByStatusDocument,
   PointEstimate,
   Scalars,
   Status,
   TaskTag,
   useCreateTaskMutation,
   useUpdateTaskMutation,
-} from '../../__generated__/graphql-improved';
+  Task,
+} from '../../__generated__/graphql-remastered';
+import { ModalCloseStyled } from './ModalClose.styled';
+import { ModalContentStyled } from './ModalContent.styled';
+import { ModalTriggerStyled } from './ModalTrigger.styled';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { useState } from 'react';
