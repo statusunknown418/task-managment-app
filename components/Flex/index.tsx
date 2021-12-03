@@ -16,6 +16,7 @@ interface FlexProps {
   p?: number;
   accentBgColor?: boolean;
   rounded?: number;
+  wrap?: boolean;
 }
 
 export const Flex = styled.div<FlexProps>`
@@ -33,4 +34,5 @@ export const Flex = styled.div<FlexProps>`
   ${(props) => props.grow && `flex-grow: ${props.grow};`};
   padding: ${(props) => props.p}px;
   border-radius: ${(props) => props.rounded}px;
+  ${(props) => props.wrap && `flex-wrap: wrap;`};
 `;
