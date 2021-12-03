@@ -104,11 +104,11 @@ export type Task = {
 
 /** Enum for tags for tasks */
 export enum TaskTag {
-  Android = 'ANDROID',
-  Ios = 'IOS',
-  NodeJs = 'NODE_JS',
-  Rails = 'RAILS',
-  React = 'REACT',
+  ANDROID = 'ANDROID',
+  IOS = 'IOS',
+  NODE_JS = 'NODE_JS',
+  RAILS = 'RAILS',
+  REACT = 'REACT',
 }
 
 export type UpdateTaskInput = {
