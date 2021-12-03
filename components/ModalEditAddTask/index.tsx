@@ -24,9 +24,7 @@ import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import * as Dialog from '@radix-ui/react-dialog';
 import { ASSIGNEES } from '../../utils/SEED';
-import * as Dropdown from '@radix-ui/react-dropdown-menu';
-import { SearchBar } from './TagDropdown.styled';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 export interface CustomModalProps {
   task: Partial<Task>;
