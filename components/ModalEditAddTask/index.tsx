@@ -1,5 +1,4 @@
 import { NextPage } from 'next';
-import styled from 'styled-components';
 import {
   GetAllTasksByStatusDocument,
   PointEstimate,
@@ -10,36 +9,24 @@ import {
   useUpdateTaskMutation,
   Task,
 } from '../../__generated__/graphql-remastered';
-import { useForm } from 'react-hook-form';
-import toast from 'react-hot-toast';
-import * as Dialog from '@radix-ui/react-dialog';
 import {
+  DatePickerStyled,
   Flex,
   ModalCloseStyled,
   ModalContentStyled,
   ModalTriggerStyled,
   OptionStyled,
+  OverlayStyled,
   SearchboxStyled,
   SelectStyled,
 } from '../exports';
-
-export const DatePickerStyled = styled.input`
-  background-color: #42464a;
-  color: white;
-  cursor: pointer;
-  box-sizing: border-box;
-  border-radius: 8px;
-  padding: 0.5rem;
-`;
-
-export const OverlayStyled = styled(Dialog.Overlay)`
-  backdrop-filter: brightness(0.7);
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-`;
+import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
+import * as Dialog from '@radix-ui/react-dialog';
+import { ASSIGNEES } from '../../utils/SEED';
+import * as Dropdown from '@radix-ui/react-dropdown-menu';
+import { SearchBar } from './TagDropdown.styled';
+import { useEffect, useState } from 'react';
 
 export interface CustomModalProps {
   task: Partial<Task>;
@@ -60,19 +47,38 @@ export const ModalAddEditTask: NextPage<CustomModalProps> = ({
   type,
   task,
 }) => {
-  // TODO - refactor this
   const [updateTask, { data, error }] = useUpdateTaskMutation();
   const [createTask, { data: createData, error: createError }] = useCreateTaskMutation();
   const { register, setValue, handleSubmit } = useForm<MutationData>();
+
+  const [expanded, setExpanded] = useState(false);
+  const [selections, setSelections] = useState<TaskTag[]>([]);
+
+  const toggleExpanded = () => {
+    if (!expanded) {
+      setExpanded(true);
+    } else {
+      setExpanded(false);
+    }
+  };
 
   const onSubmitHandler = taskSubmit();
 
   return (
     <Dialog.Root>
       <OverlayStyled />
-      <ModalTriggerStyled p={4}>{children}</ModalTriggerStyled>
+      <ModalTriggerStyled
+        style={
+          type === 'create'
+            ? { backgroundColor: '#DA584B', borderRadius: '8px', paddingInline: '5px' }
+            : {}
+        }
+        p={4}
+      >
+        {children}
+      </ModalTriggerStyled>
 
-      <ModalContentStyled p={25} rounded={10}>
+      <ModalContentStyled p={35} rounded={10}>
         <Dialog.Title>
           <SearchboxStyled
             autoFocus={false}
@@ -86,39 +92,65 @@ export const ModalAddEditTask: NextPage<CustomModalProps> = ({
           />
         </Dialog.Title>
 
-        <Flex
-          gap={16}
-          alignItems="center"
-          justifyContent="space-between"
-          style={{ position: 'relative' }}
-        >
-          <SelectStyled name="estimate" id="estimate" defaultValue={'estimate'}>
-            <OptionStyled value="estimate">Estimate</OptionStyled>
+        <Flex gap={16} alignItems="center" justifyContent="space-between">
+          <SelectStyled {...register('pointEstimate')}>
+            <OptionStyled>Estimate</OptionStyled>
             {Object.values(PointEstimate).map((point) => (
-              <OptionStyled key={point} {...register('pointEstimate', { value: point })}>
-                {point}
-              </OptionStyled>
+              <OptionStyled key={point}>{point}</OptionStyled>
             ))}
           </SelectStyled>
 
-          <SelectStyled name="estimate" id="estimate" defaultValue={'estimate'}>
-            <OptionStyled value="asignee">Asignee</OptionStyled>
-            {Object.values(PointEstimate).map((point) => (
-              <OptionStyled key={point} {...register('pointEstimate', { value: point })}>
-                {point}
-              </OptionStyled>
+          <SelectStyled name="assignee">
+            <OptionStyled value="assignee">Assignee</OptionStyled>
+            {ASSIGNEES.map(({ id, name }) => (
+              <OptionStyled key={id}>{name}</OptionStyled>
             ))}
           </SelectStyled>
 
           <div>
-            <DatePickerStyled
-              type="date"
-              {...register('dueDate', {
-                required: true,
-                value: new Date(),
-              })}
-              placeholder={task.dueDate}
-            />
+            <div>
+              <div onClick={toggleExpanded}>
+                <h6>Tags</h6>
+                <div>
+                  {selections.length
+                    ? selections.map((name, i) => (
+                        <span key={i}>
+                          {i ? ', ' : null}
+                          {name}
+                        </span>
+                      ))
+                    : 'None selected'}
+                </div>
+              </div>
+              {expanded && (
+                <div className="border-gray-200 border border-solid">
+                  {Object.values(TaskTag).map((tag) => (
+                    <label htmlFor="one" className="block" key={tag}>
+                      <input
+                        type="checkbox"
+                        name={tag}
+                        onChange={(event) => {
+                          // small but not so simple hack to get toggle value on checkbox and assign it to our submitHandler
+                          console.log(event.target.name);
+                          if (event.target.checked) {
+                            return setSelections([...selections, tag]);
+                          }
+                          const filtered = selections.filter(
+                            (name) => name !== event.target.name
+                          );
+                          setValue('tags', filtered);
+                          return setSelections(filtered);
+                        }}
+                      />
+                      {tag}
+                    </label>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+          <div>
+            <DatePickerStyled type="date" {...register('dueDate')} />
           </div>
         </Flex>
 
@@ -139,7 +171,9 @@ export const ModalAddEditTask: NextPage<CustomModalProps> = ({
 
   function taskSubmit() {
     return handleSubmit(async (data) => {
+      console.log(selections);
       const { taskName: name, pointEstimate, dueDate, status, tags } = data;
+
       try {
         if (type === 'edit') {
           await updateTask({
@@ -147,7 +181,7 @@ export const ModalAddEditTask: NextPage<CustomModalProps> = ({
               updateTaskInput: {
                 id: task.id,
                 name,
-                dueDate,
+                dueDate: dueDate === null ? task.dueDate : dueDate,
                 pointEstimate,
                 tags,
                 status,
@@ -170,18 +204,17 @@ export const ModalAddEditTask: NextPage<CustomModalProps> = ({
                 name,
                 pointEstimate,
                 status: Status.Backlog,
-                tags: [TaskTag.Rails, TaskTag.React],
+                tags,
               },
             },
             refetchQueries: [GetAllTasksByStatusDocument],
           });
 
           toast.success('Task created successfully');
-          // not permanent solution
           window.location.reload();
         }
       } catch (error) {
-        toast.error('Something went wrong');
+        toast.error('Something went wrong, please provide all fields');
       }
 
       console.log({ data, error, createData, createError });
