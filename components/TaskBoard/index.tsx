@@ -1,4 +1,3 @@
-import { useQuery } from '@apollo/client';
 import { NextPage } from 'next';
 import { useFixedToast } from '../../utils/hooks/useFixedToast';
 import { useGetAllTaskStatusQuery } from '../../__generated__/graphql-remastered';

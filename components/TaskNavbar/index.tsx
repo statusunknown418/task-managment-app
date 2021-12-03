@@ -1,11 +1,9 @@
 import { DashboardIcon, HamburgerMenuIcon, PlusIcon } from '@radix-ui/react-icons';
 import { NextPage } from 'next';
 import { useRouter } from 'next/dist/client/router';
-import { Flex } from '../Flex';
-import { IconStyled } from '../Searchbox/IconSidebar.styled';
 import dynamic from 'next/dynamic';
-import { CustomModalProps } from '../ModalEditAddTask';
 import Link from 'next/link';
+import { CustomModalProps, Flex, IconStyled } from '../exports';
 
 const DynamicAddTaskModal = dynamic<CustomModalProps>(
   () => import('../ModalEditAddTask').then((mod) => mod.ModalAddEditTask),

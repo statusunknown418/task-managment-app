@@ -7,9 +7,8 @@ import {
   GetAllTaskStatusDocument,
   useDeleteTaskByIdMutation,
 } from '../../../../__generated__/graphql-remastered';
-import { Flex } from '../../../Flex';
-import { CustomModalProps, ModalAddEditTask } from '../../../ModalEditAddTask';
 import dynamic from 'next/dynamic';
+import { CustomModalProps, Flex } from '../../../exports';
 
 const DynamicAddEditModal = dynamic<CustomModalProps>(
   () => import('../../../ModalEditAddTask').then((mod) => mod.ModalAddEditTask),
