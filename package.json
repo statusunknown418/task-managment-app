@@ -25,12 +25,14 @@
     "@graphql-codegen/typescript": "2.4.1",
     "@graphql-codegen/typescript-operations": "2.2.1",
     "@graphql-codegen/typescript-react-apollo": "3.2.2",
+    "@types/faker": "^5.5.9",
     "@types/node": "16.11.9",
     "@types/react": "17.0.36",
     "@types/styled-components": "^5.1.15",
     "babel-plugin-styled-components": "^2.0.1",
     "eslint": "7",
     "eslint-config-next": "12.0.4",
+    "faker": "^5.5.3",
     "styled-components": "^5.3.3",
     "typescript": "4.5.2"
   }
