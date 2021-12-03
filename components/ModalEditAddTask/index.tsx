@@ -52,10 +52,6 @@ export const ModalAddEditTask: NextPage<CustomModalProps> = ({
   const [expanded, setExpanded] = useState(false);
   const [selections, setSelections] = useState<TaskTag[]>([]);
 
-  const toggleExpanded = () => {
-    setExpanded(!expanded);
-  };
-
   const onSubmitHandler = taskSubmit();
 
   return (
@@ -103,7 +99,7 @@ export const ModalAddEditTask: NextPage<CustomModalProps> = ({
 
           <div>
             <div>
-              <div onClick={toggleExpanded}>
+              <div onClick={() => setExpanded((prev) => !prev)}>
                 <h6>Tags</h6>
                 <div>
                   {selections.length
