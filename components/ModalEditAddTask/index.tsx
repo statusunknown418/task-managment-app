@@ -53,11 +53,7 @@ export const ModalAddEditTask: NextPage<CustomModalProps> = ({
   const [selections, setSelections] = useState<TaskTag[]>([]);
 
   const toggleExpanded = () => {
-    if (!expanded) {
-      setExpanded(true);
-    } else {
-      setExpanded(false);
-    }
+    setExpanded(!expanded);
   };
 
   const onSubmitHandler = taskSubmit();
@@ -136,7 +132,6 @@ export const ModalAddEditTask: NextPage<CustomModalProps> = ({
                           const filtered = selections.filter(
                             (name) => name !== event.target.name
                           );
-                          setValue('tags', filtered);
                           return setSelections(filtered);
                         }}
                       />
@@ -157,7 +152,10 @@ export const ModalAddEditTask: NextPage<CustomModalProps> = ({
           <ModalCloseStyled
             p={8}
             variant="primary"
-            onClick={() => onSubmitHandler()}
+            onClick={() => {
+              setValue('tags', selections);
+              onSubmitHandler();
+            }}
             type="submit"
           >
             {type}
@@ -169,9 +167,7 @@ export const ModalAddEditTask: NextPage<CustomModalProps> = ({
 
   function taskSubmit() {
     return handleSubmit(async (data) => {
-      console.log(selections);
       const { taskName: name, pointEstimate, dueDate, status, tags } = data;
-
       try {
         if (type === 'edit') {
           await updateTask({
