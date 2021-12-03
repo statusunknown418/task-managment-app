@@ -1,20 +1,30 @@
 import { DialogContent, DialogContentProps } from '@radix-ui/react-dialog';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 export interface ExtendedModalContentProps extends DialogContentProps {
   p?: number;
   rounded?: number;
 }
 
+const animateOnShow = keyframes`
+  0% {
+    opacity: 0;
+    scale: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+`;
+
 export const ModalContentStyled = styled(DialogContent)<ExtendedModalContentProps>`
   position: fixed;
   top: 50%;
   left: 50%;
-  width: 90vw;
+  width: 600px;
   transform: translate(-50%, -50%);
-  max-width: 450px;
-  max-height: 85vh;
   padding: ${({ p }) => p}px;
   background-color: ${(props) => props.theme.accentBg};
   border-radius: ${({ rounded }) => rounded}px;
+
+  animation: ${animateOnShow} 0.3s ease-in;
 `;
