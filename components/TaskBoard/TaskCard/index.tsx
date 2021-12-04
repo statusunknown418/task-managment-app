@@ -56,7 +56,7 @@ export const TaskCard: NextPage<Props> = ({
         <DueDateCard dueDate={dueDate} />
       </Flex>
 
-      <Flex wrap alignItems="center" mt={10} gap={10}>
+      <Flex wrap={'wrap'} alignItems="center" mt={10} gap={10}>
         {tags?.map((tag, id) => (
           <TagStyled key={id} tag={tag}>
             {tag.split('_').join(' ')}

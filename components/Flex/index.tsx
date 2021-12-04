@@ -16,7 +16,7 @@ interface FlexProps {
   p?: number;
   accentBgColor?: boolean;
   rounded?: number;
-  wrap?: boolean;
+  wrap?: string;
 }
 
 export const Flex = styled.div<FlexProps>`

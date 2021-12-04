@@ -19,7 +19,12 @@ import {
   OverlayStyled,
   SearchboxStyled,
   SelectStyled,
+  TagContainerStyled,
+  TagLabelStyled,
+  TagsDropdownStyled,
+  TagTitleStyled,
 } from '../exports';
+import { ChevronDownIcon, ChevronUpIcon } from '@radix-ui/react-icons';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import * as Dialog from '@radix-ui/react-dialog';
@@ -45,7 +50,7 @@ export const ModalAddEditTask: NextPage<CustomModalProps> = ({
   type,
   task,
 }) => {
-  const [updateTask, { data, error }] = useUpdateTaskMutation();
+  const [updateTask, { error }] = useUpdateTaskMutation();
   const [createTask, { data: createData, error: createError }] = useCreateTaskMutation();
   const { register, setValue, handleSubmit } = useForm<MutationData>();
 
@@ -99,29 +104,28 @@ export const ModalAddEditTask: NextPage<CustomModalProps> = ({
 
           <div>
             <div>
-              <div onClick={() => setExpanded((prev) => !prev)}>
-                <h6>Tags</h6>
-                <div>
+              <Flex onClick={() => setExpanded((prev) => !prev)}>
+                <TagContainerStyled>
                   {selections.length
                     ? selections.map((name, i) => (
                         <span key={i}>
-                          {i ? ', ' : null}
-                          {name}
+                          {i ? ' - ' : null} {name.split('_').join(' ')}
                         </span>
                       ))
-                    : 'None selected'}
-                </div>
-              </div>
+                    : 'Tags'}
+                  {expanded ? <ChevronUpIcon /> : <ChevronDownIcon />}
+                </TagContainerStyled>
+              </Flex>
               {expanded && (
-                <div className="border-gray-200 border border-solid">
+                <TagsDropdownStyled>
+                  <TagTitleStyled>Tag title</TagTitleStyled>
                   {Object.values(TaskTag).map((tag) => (
-                    <label htmlFor="one" className="block" key={tag}>
+                    <TagLabelStyled htmlFor="one" key={tag}>
                       <input
                         type="checkbox"
                         name={tag}
                         onChange={(event) => {
                           // small but not so simple hack to get toggle value on checkbox and assign it to our submitHandler
-                          console.log(event.target.name);
                           if (event.target.checked) {
                             return setSelections([...selections, tag]);
                           }
@@ -132,19 +136,20 @@ export const ModalAddEditTask: NextPage<CustomModalProps> = ({
                         }}
                       />
                       {tag}
-                    </label>
+                    </TagLabelStyled>
                   ))}
-                </div>
+                </TagsDropdownStyled>
               )}
             </div>
           </div>
-          <div>
-            <DatePickerStyled type="date" {...register('dueDate')} />
-          </div>
+
+          <DatePickerStyled type="date" {...register('dueDate')} />
         </Flex>
 
-        <Flex gap={24} alignItems="center">
-          <ModalCloseStyled p={8}>Cancel</ModalCloseStyled>
+        <Flex gap={24} mt={16} alignItems="center">
+          <ModalCloseStyled p={8} onClick={() => setSelections([])}>
+            Cancel
+          </ModalCloseStyled>
           <ModalCloseStyled
             p={8}
             variant="primary"
@@ -205,9 +210,9 @@ export const ModalAddEditTask: NextPage<CustomModalProps> = ({
         }
       } catch (error) {
         toast.error('Something went wrong, please provide all fields');
+      } finally {
+        setSelections([]);
       }
-
-      console.log({ data, error, createData, createError });
     });
   }
 };
