@@ -50,8 +50,8 @@ export const ModalAddEditTask: NextPage<CustomModalProps> = ({
   type,
   task,
 }) => {
-  const [updateTask, { error }] = useUpdateTaskMutation();
-  const [createTask, { data: createData, error: createError }] = useCreateTaskMutation();
+  const [updateTask] = useUpdateTaskMutation();
+  const [createTask] = useCreateTaskMutation();
   const { register, setValue, handleSubmit } = useForm<MutationData>();
 
   const [expanded, setExpanded] = useState(false);
