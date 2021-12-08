@@ -1,0 +1,208 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render a task card 1`] = `
+<div
+  className="Flex-sc-clust5-0 ivJocd"
+  direction="column"
+  style={
+    Object {
+      "minWidth": "100%",
+    }
+  }
+>
+  <div
+    className="Flex-sc-clust5-0 kNIbvG"
+  >
+    <p
+      style={
+        Object {
+          "fontWeight": "bolder",
+        }
+      }
+    >
+      new task
+    </p>
+  </div>
+  <div
+    className="Flex-sc-clust5-0 FApbX"
+  >
+    <p
+      style={
+        Object {
+          "fontWeight": 500,
+        }
+      }
+    >
+      1
+       pts
+    </p>
+    <div
+      className="DueDateCardStyled-sc-dx4o1y-0 kiBuSk"
+    >
+      <svg
+        fill="currentColor"
+        height={20}
+        width={20}
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M11 20a9 9 0 110-18 9 9 0 010 18zm0-2a7 7 0 100-14 7 7 0 000 14zm1-7h3v2h-5V6h2v5zM.747 4.282L4.282.747l1.415 1.414L2.16 5.697.747 4.282zM17.717.747l3.536 3.535-1.414 1.415-3.536-3.536L17.718.747h-.001z"
+          height={20}
+          width={20}
+        />
+      </svg>
+      <p
+        style={
+          Object {
+            "textTransform": "uppercase",
+          }
+        }
+      >
+        Aug 26 2022
+      </p>
+    </div>
+  </div>
+  <div
+    className="Flex-sc-clust5-0 hScVHi"
+    wrap="wrap"
+  >
+    <div
+      className="Tags__TagStyled-sc-17a5l82-0 YDMhO"
+    >
+      ANDROID
+    </div>
+    <div
+      className="Tags__TagStyled-sc-17a5l82-0 kmwFFy"
+    >
+      IOS
+    </div>
+  </div>
+  <div
+    className="Flex-sc-clust5-0 FApbX"
+  >
+    <div
+      style={
+        Object {
+          "borderRadius": "50%",
+          "overflow": "hidden",
+        }
+      }
+    >
+      <span
+        style={
+          Object {
+            "background": "none",
+            "border": 0,
+            "boxSizing": "border-box",
+            "display": "inline-block",
+            "height": "initial",
+            "margin": 0,
+            "maxWidth": "100%",
+            "opacity": 1,
+            "overflow": "hidden",
+            "padding": 0,
+            "position": "relative",
+            "width": "initial",
+          }
+        }
+      >
+        <span
+          style={
+            Object {
+              "background": "none",
+              "border": 0,
+              "boxSizing": "border-box",
+              "display": "block",
+              "height": "initial",
+              "margin": 0,
+              "maxWidth": "100%",
+              "opacity": 1,
+              "padding": 0,
+              "width": "initial",
+            }
+          }
+        >
+          <img
+            alt=""
+            aria-hidden={true}
+            src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjUiIGhlaWdodD0iMjUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmVyc2lvbj0iMS4xIi8+"
+            style={
+              Object {
+                "background": "none",
+                "border": 0,
+                "display": "block",
+                "height": "initial",
+                "margin": 0,
+                "maxWidth": "100%",
+                "opacity": 1,
+                "padding": 0,
+                "width": "initial",
+              }
+            }
+          />
+        </span>
+        <img
+          alt="avatar"
+          data-nimg="intrinsic"
+          decoding="async"
+          src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+          style={
+            Object {
+              "border": "none",
+              "bottom": 0,
+              "boxSizing": "border-box",
+              "display": "block",
+              "height": 0,
+              "left": 0,
+              "margin": "auto",
+              "maxHeight": "100%",
+              "maxWidth": "100%",
+              "minHeight": "100%",
+              "minWidth": "100%",
+              "objectFit": "cover",
+              "objectPosition": undefined,
+              "padding": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+              "width": 0,
+            }
+          }
+        />
+        <noscript>
+          <img
+            alt="avatar"
+            data-nimg="intrinsic"
+            decoding="async"
+            loading="lazy"
+            src="/_next/image?url=https%3A%2F%2Favatars.dicebear.com%2Fapi%2Fbottts%2FYvonne%20Ortiz.svg&w=64&q=75"
+            srcSet="/_next/image?url=https%3A%2F%2Favatars.dicebear.com%2Fapi%2Fbottts%2FYvonne%20Ortiz.svg&w=32&q=75 1x, /_next/image?url=https%3A%2F%2Favatars.dicebear.com%2Fapi%2Fbottts%2FYvonne%20Ortiz.svg&w=64&q=75 2x"
+            style={
+              Object {
+                "border": "none",
+                "bottom": 0,
+                "boxSizing": "border-box",
+                "display": "block",
+                "height": 0,
+                "left": 0,
+                "margin": "auto",
+                "maxHeight": "100%",
+                "maxWidth": "100%",
+                "minHeight": "100%",
+                "minWidth": "100%",
+                "objectFit": "cover",
+                "objectPosition": undefined,
+                "padding": 0,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+                "width": 0,
+              }
+            }
+          />
+        </noscript>
+      </span>
+    </div>
+  </div>
+</div>
+`;
