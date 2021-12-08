@@ -5,7 +5,7 @@ query getAllTasksByStatus($input: FilterTaskInput!) {
     name
     tags
     pointEstimate
-    owner {
+    creator {
       fullName
       id
     }
