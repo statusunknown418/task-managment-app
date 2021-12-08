@@ -6,7 +6,11 @@ export interface Props {
 }
 
 export const DueDateCard: NextPage<Props> = ({ dueDate }) => {
-  const flatDate = new Date(dueDate).toDateString().split(' ').splice(1, 3).join(' ');
+  const flatDate = new Date(dueDate)
+    .toDateString()
+    .split(' ')
+    .splice(1, 3)
+    .join(' ');
 
   // check if some date is yesterday
   const isYesterday = (someDate: Date) => {

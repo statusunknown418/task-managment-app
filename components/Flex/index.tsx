@@ -1,5 +1,4 @@
-import { NextPage } from 'next';
-import styled, { CSSProperties } from 'styled-components';
+import styled from 'styled-components';
 
 interface FlexProps {
   alignItems?: 'flex-start' | 'center' | 'flex-end';
@@ -22,7 +21,8 @@ interface FlexProps {
 export const Flex = styled.div<FlexProps>`
   flex-direction: ${(props) => (props.direction ? props.direction : 'row')};
   ${(props) => (props.basis ? `flex: ${props.basis}` : 'display: flex')};
-  ${(props) => props.accentBgColor && `background-color: ${props.theme.accentBg}`};
+  ${(props) =>
+    props.accentBgColor && `background-color: ${props.theme.accentBg}`};
   align-items: ${(props) => (props.alignItems ? props.alignItems : 'center')};
   justify-content: ${(props) => props.justifyContent};
   gap: ${(props) => props.gap}px;
