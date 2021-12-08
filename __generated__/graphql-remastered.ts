@@ -95,7 +95,7 @@ export type Task = {
   dueDate: Scalars['DateTime'];
   id: Scalars['ID'];
   name: Scalars['String'];
-  owner: User;
+  creator: User;
   pointEstimate: PointEstimate;
   position: Scalars['Float'];
   status: Status;
@@ -435,7 +435,7 @@ export const GetAllTasksByStatusDocument = gql`
       name
       tags
       pointEstimate
-      owner {
+      creator {
         fullName
         id
       }

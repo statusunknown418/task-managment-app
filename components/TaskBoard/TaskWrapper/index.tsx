@@ -6,7 +6,9 @@ import { getTaskByStatus } from '../../../graphql/queries/getTaskByStatus';
 import { Query, Task } from '../../../__generated__/graphql-remastered';
 import { Flex, Spinner, TaskCard } from '../../exports';
 
-export const TaskWrapper: NextPage<{ sectionTitle: string }> = ({ sectionTitle }) => {
+export const TaskWrapper: NextPage<{ sectionTitle: string }> = ({
+  sectionTitle,
+}) => {
   const {
     data: tasks,
     loading,
@@ -43,7 +45,7 @@ export const TaskWrapper: NextPage<{ sectionTitle: string }> = ({ sectionTitle }
     >
       <h3 style={{ textTransform: 'capitalize' }}>
         {sectionTitle.replace(/[^a-zA-Z+$]/, ' ')} (
-        {tasks && tasks.tasks.length > 9
+        {tasks !== undefined && tasks.tasks.length > 9
           ? tasks?.tasks.length
           : `0${tasks?.tasks.length}`}
         )
@@ -55,7 +57,8 @@ export const TaskWrapper: NextPage<{ sectionTitle: string }> = ({ sectionTitle }
         style={{ minWidth: '100%' }}
       >
         {loading && <Spinner />}
-        {allTasks && allTasks.map((task) => <TaskCard key={task.id} task={task} />)}
+        {allTasks &&
+          allTasks.map((task) => <TaskCard key={task.id} task={task} />)}
       </Flex>
     </Flex>
   );

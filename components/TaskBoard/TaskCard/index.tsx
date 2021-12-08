@@ -10,7 +10,7 @@ import { EditDeleteDropdownProps } from './EditDeleteMenu';
 
 const DynamicEditDeleteDropdown = dynamic<EditDeleteDropdownProps>(
   () => import('./EditDeleteMenu').then((mod) => mod.EditDeleteMenu),
-  { ssr: false }
+  { ssr: false },
 );
 
 interface Props {
@@ -26,7 +26,7 @@ export enum pointsEnum {
 }
 
 export const TaskCard: NextPage<Props> = ({
-  task: { id, dueDate, name, tags, pointEstimate, owner },
+  task: { id, dueDate, name, tags, pointEstimate, creator },
 }) => {
   return (
     <Flex
@@ -65,9 +65,9 @@ export const TaskCard: NextPage<Props> = ({
       </Flex>
 
       <Flex alignItems="center" justifyContent="space-between" mt={10}>
-        {owner ? (
+        {creator ? (
           <UserAvatar
-            userName={owner.fullName}
+            userName={creator.fullName}
             height={25}
             width={25}
             spriteType={spriteTypes.BOTTTS}
