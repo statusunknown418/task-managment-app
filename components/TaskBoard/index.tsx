@@ -1,7 +1,9 @@
 import { NextPage } from 'next';
 import { useFixedToast } from '../../utils/hooks/useFixedToast';
 import { useGetAllTaskStatusQuery } from '../../__generated__/graphql-remastered';
-import { ContainerStyled, Spinner, TaskWrapper } from '../exports';
+import { Spinner } from '../Spinner';
+import { ContainerStyled } from './TasksContainer.styled';
+import { TaskWrapper } from './TaskWrapper';
 
 export const TaskBoard: NextPage = () => {
   const {
@@ -15,12 +17,12 @@ export const TaskBoard: NextPage = () => {
   });
 
   const sectionNamesSet = new Set<string>(
-    taskColumnData?.tasks.map((task) => task.status)
+    taskColumnData?.tasks.map((task) => task.status),
   );
 
   useFixedToast(
     error ? 'error' : 'success',
-    error !== undefined ? error.message : 'Tasks loaded'
+    error !== undefined ? error.message : 'Tasks loaded',
   );
 
   return (

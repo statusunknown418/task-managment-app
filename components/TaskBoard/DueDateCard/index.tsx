@@ -33,7 +33,7 @@ export const DueDateCard: NextPage<Props> = ({ dueDate }) => {
   };
 
   return (
-    <DueDateCardStyled dueDate={dueDate} p={5} rounded={4} gap={10}>
+    <DueDateCardStyled dueDate={dueDate} padding={5} borderRadius={4} gap={10}>
       <CustomIcon width={20} height={20} />
       <p style={{ textTransform: 'uppercase' }}>
         {isToday(new Date(dueDate))

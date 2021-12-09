@@ -26,7 +26,6 @@ export const IconStyled = styled.div<SearchBoxProps>`
       border: 1px solid ${props.theme.primaryClrRed};
       color: ${props.theme.primaryClrRed};
     `}
-  
   transition: color 0.2s ease-in-out;
 
   &:hover {

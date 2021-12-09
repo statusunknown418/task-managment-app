@@ -9,27 +9,26 @@ import {
   useUpdateTaskMutation,
   Task,
 } from '../../__generated__/graphql-remastered';
-import {
-  DatePickerStyled,
-  Flex,
-  ModalCloseStyled,
-  ModalContentStyled,
-  ModalTriggerStyled,
-  OptionStyled,
-  OverlayStyled,
-  SearchboxStyled,
-  SelectStyled,
-  TagContainerStyled,
-  TagLabelStyled,
-  TagsDropdownStyled,
-  TagTitleStyled,
-} from '../exports';
+
 import { ChevronDownIcon, ChevronUpIcon } from '@radix-ui/react-icons';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import * as Dialog from '@radix-ui/react-dialog';
 import { ASSIGNEES } from '../../utils/SEED';
 import { useState } from 'react';
+import { Flex } from '../Flex';
+import { SearchboxStyled } from '../Searchbox/Searchbox.styled';
+import { TagContainerStyled } from '../TaskBoard/Tags/TagContainer.styled';
+import { TagsDropdownStyled } from '../TaskBoard/Tags/TagDropdown.styled';
+import { TagLabelStyled } from '../TaskBoard/Tags/TagLabel.styled';
+import { TagTitleStyled } from '../TaskBoard/Tags/TagTitle.styled';
+import { DatePickerStyled } from './Datepicker.styled';
+import { ModalCloseStyled } from './ModalClose.styled';
+import { ModalContentStyled } from './ModalContent.styled';
+import { ModalTriggerStyled } from './ModalTrigger.styled';
+import { OptionStyled } from './Option.styled';
+import { OverlayStyled } from './Overlay.styled';
+import { SelectStyled } from './Select.styled';
 
 export interface CustomModalProps {
   task: Partial<Task>;
@@ -65,20 +64,24 @@ export const ModalAddEditTask: NextPage<CustomModalProps> = ({
       <ModalTriggerStyled
         style={
           type === 'create'
-            ? { backgroundColor: '#DA584B', borderRadius: '8px', paddingInline: '5px' }
+            ? {
+                backgroundColor: '#DA584B',
+                borderRadius: '8px',
+                paddingInline: '5px',
+              }
             : {}
         }
-        p={4}
+        padding={4}
       >
         {children}
       </ModalTriggerStyled>
 
-      <ModalContentStyled p={35} rounded={10}>
+      <ModalContentStyled padding={35} rounded={10}>
         <Dialog.Title>
           <SearchboxStyled
             autoFocus={false}
             type={'text'}
-            p={2}
+            padding={2}
             fontWeight="700"
             placeholder={task.name || 'New task name'}
             fontSize={17}
@@ -130,7 +133,7 @@ export const ModalAddEditTask: NextPage<CustomModalProps> = ({
                             return setSelections([...selections, tag]);
                           }
                           const filtered = selections.filter(
-                            (name) => name !== event.target.name
+                            (name) => name !== event.target.name,
                           );
                           return setSelections(filtered);
                         }}
@@ -146,12 +149,12 @@ export const ModalAddEditTask: NextPage<CustomModalProps> = ({
           <DatePickerStyled type="date" {...register('dueDate')} />
         </Flex>
 
-        <Flex gap={24} mt={16} alignItems="center">
-          <ModalCloseStyled p={8} onClick={() => setSelections([])}>
+        <Flex gap={24} marginTop={16} alignItems="center">
+          <ModalCloseStyled padding={8} onClick={() => setSelections([])}>
             Cancel
           </ModalCloseStyled>
           <ModalCloseStyled
-            p={8}
+            padding={8}
             variant="primary"
             onClick={() => {
               setValue('tags', selections);

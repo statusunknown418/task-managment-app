@@ -1,34 +1,34 @@
-import { useQuery } from '@apollo/client'
-import { NextPage } from 'next'
-import { Flex } from '../components/Flex'
-import { Spinner } from '../components/Spinner'
-import { getUser } from '../graphql/queries/getUser'
-import Image from 'next/image'
-import styled from 'styled-components'
-import { spriteTypes, UserAvatar } from '../components/UserAvatar'
-import { Query } from '../__generated__/graphql-remastered'
+import { useQuery } from '@apollo/client';
+import { NextPage } from 'next';
+import { Flex } from '../components/Flex';
+import { Spinner } from '../components/Spinner';
+import { getUser } from '../graphql/queries/getUser';
+import Image from 'next/image';
+import styled from 'styled-components';
+import { spriteTypes, UserAvatar } from '../components/UserAvatar';
+import { Query } from '../__generated__/graphql-remastered';
 
 export interface StyledSpanProps {
-  color?: string
+  color?: string;
 }
 export const SpanStyled = styled.span<StyledSpanProps>`
   ${(props) =>
     props.color
       ? `color: ${props.color}`
       : `color: ${props.theme.primaryClrRed}`}
-`
+`;
 
 const ProfilePage: NextPage = () => {
-  const { data: userData, loading, error } = useQuery<Query>(getUser)
+  const { data: userData, loading, error } = useQuery<Query>(getUser);
 
   return (
     <Flex
       direction="column"
       alignItems="center"
       accentBgColor
-      rounded={8}
+      borderRadius={8}
       gap={8}
-      p={24}
+      padding={24}
     >
       {loading && <Spinner />}
       {error && (
@@ -59,7 +59,7 @@ const ProfilePage: NextPage = () => {
         </>
       )}
     </Flex>
-  )
-}
+  );
+};
 
-export default ProfilePage
+export default ProfilePage;

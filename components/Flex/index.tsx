@@ -6,15 +6,15 @@ interface FlexProps {
   gap?: number;
   marginX?: number;
   marginY?: number;
-  mt?: number;
-  mb?: number;
+  marginTop?: number;
+  marginBottom?: number;
   direction?: 'row' | 'column';
   isCard?: boolean;
   grow?: number;
   basis?: string;
-  p?: number;
+  padding?: number;
   accentBgColor?: boolean;
-  rounded?: number;
+  borderRadius?: number;
   wrap?: string;
 }
 
@@ -28,11 +28,11 @@ export const Flex = styled.div<FlexProps>`
   gap: ${(props) => props.gap}px;
   margin-block: ${(props) => props.marginY}px;
   margin-inline: ${(props) => props.marginX}px;
-  margin-top: ${(props) => props.mt}px;
-  margin-bottom: ${(props) => props.mb}px;
+  margin-top: ${(props) => props.marginTop}px;
+  margin-bottom: ${(props) => props.marginBottom}px;
   ${(props) => props.isCard && `background-color: ${props.theme.accentBg};`}
   ${(props) => props.grow && `flex-grow: ${props.grow};`};
-  padding: ${(props) => props.p}px;
-  border-radius: ${(props) => props.rounded}px;
+  padding: ${(props) => props.padding}px;
+  border-radius: ${(props) => props.borderRadius}px;
   ${(props) => props.wrap && `flex-wrap: wrap;`};
 `;

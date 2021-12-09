@@ -3,12 +3,12 @@ import styled from 'styled-components';
 
 export interface ModalCloseProps {
   variant?: 'primary' | 'secondary';
-  p?: number;
+  padding?: number;
   textColor?: string;
   fontWeight?: string;
 }
 export const ModalCloseStyled = styled(DialogClose)<ModalCloseProps>`
-  padding: ${({ p }) => p}px;
+  padding: ${({ padding: p }) => p}px;
   background-color: ${(props) =>
     props.variant ? props.theme.primaryClrRed : 'transparent'};
   color: ${(props) =>

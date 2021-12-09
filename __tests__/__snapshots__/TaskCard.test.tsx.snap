@@ -58,7 +58,7 @@ exports[`should render a task card 1`] = `
           }
         }
       >
-        Aug 26 2022
+        Dec 23 2021
       </p>
     </div>
   </div>
@@ -175,8 +175,8 @@ exports[`should render a task card 1`] = `
             data-nimg="intrinsic"
             decoding="async"
             loading="lazy"
-            src="/_next/image?url=https%3A%2F%2Favatars.dicebear.com%2Fapi%2Fbottts%2FYvonne%20Ortiz.svg&w=64&q=75"
-            srcSet="/_next/image?url=https%3A%2F%2Favatars.dicebear.com%2Fapi%2Fbottts%2FYvonne%20Ortiz.svg&w=32&q=75 1x, /_next/image?url=https%3A%2F%2Favatars.dicebear.com%2Fapi%2Fbottts%2FYvonne%20Ortiz.svg&w=64&q=75 2x"
+            src="/_next/image?url=https%3A%2F%2Favatars.dicebear.com%2Fapi%2Fbottts%2FTracey%20Connelly.svg&w=64&q=75"
+            srcSet="/_next/image?url=https%3A%2F%2Favatars.dicebear.com%2Fapi%2Fbottts%2FTracey%20Connelly.svg&w=32&q=75 1x, /_next/image?url=https%3A%2F%2Favatars.dicebear.com%2Fapi%2Fbottts%2FTracey%20Connelly.svg&w=64&q=75 2x"
             style={
               Object {
                 "border": "none",

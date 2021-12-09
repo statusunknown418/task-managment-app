@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Flex } from '../../exports';
+import { Flex } from '../../Flex';
 
 export const TagContainerStyled = styled(Flex)`
   background-color: #42464a;

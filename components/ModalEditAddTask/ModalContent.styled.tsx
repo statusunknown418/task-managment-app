@@ -2,7 +2,7 @@ import { DialogContent, DialogContentProps } from '@radix-ui/react-dialog';
 import styled, { keyframes } from 'styled-components';
 
 export interface ExtendedModalContentProps extends DialogContentProps {
-  p?: number;
+  padding?: number;
   rounded?: number;
 }
 
@@ -22,7 +22,7 @@ export const ModalContentStyled = styled(DialogContent)<ExtendedModalContentProp
   left: 50%;
   width: 600px;
   transform: translate(-50%, -50%);
-  padding: ${({ p }) => p}px;
+  padding: ${({ padding: p }) => p}px;
   background-color: ${(props) => props.theme.accentBg};
   border-radius: ${({ rounded }) => rounded}px;
 

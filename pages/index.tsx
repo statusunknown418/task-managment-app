@@ -2,7 +2,7 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useEffect, useState } from 'react';
 import { Toaster } from 'react-hot-toast';
-import { TaskBoard } from '../components/exports';
+import { TaskBoard } from '../components/TaskBoard';
 
 const Home: NextPage = () => {
   const [showToaster, setShowToaster] = useState<boolean | undefined>();

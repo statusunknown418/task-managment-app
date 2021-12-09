@@ -8,13 +8,14 @@ import {
   useDeleteTaskByIdMutation,
 } from '../../../../__generated__/graphql-remastered';
 import dynamic from 'next/dynamic';
-import { CustomModalProps, Flex } from '../../../exports';
+import { Flex } from '../../../Flex';
+import { CustomModalProps } from '../../../ModalEditAddTask';
 
 const DynamicAddEditModal = dynamic<CustomModalProps>(
   () => import('../../../ModalEditAddTask').then((mod) => mod.ModalAddEditTask),
   {
     ssr: false,
-  }
+  },
 );
 
 export interface EditDeleteDropdownProps extends CustomModalProps {}
@@ -37,7 +38,7 @@ export const DropDownItemStyled = styled(Dropdown.DropdownMenuItem)`
 `;
 
 export const DropDownTriggerStyled = styled(
-  Dropdown.DropdownMenuTrigger
+  Dropdown.DropdownMenuTrigger,
 )<Dropdown.DropdownMenuTriggerProps>`
   outline: none;
   cursor: pointer;

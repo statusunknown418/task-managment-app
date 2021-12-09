@@ -34,8 +34,8 @@ export const TaskCard: NextPage<Props> = ({
       alignItems="flex-start"
       direction="column"
       basis="1"
-      p={16}
-      rounded={8}
+      padding={16}
+      borderRadius={8}
       style={{ minWidth: '100%' }}
     >
       <Flex alignItems="center" justifyContent="space-between">
@@ -48,7 +48,7 @@ export const TaskCard: NextPage<Props> = ({
         </DynamicEditDeleteDropdown>
       </Flex>
 
-      <Flex alignItems="center" justifyContent="space-between" mt={10}>
+      <Flex alignItems="center" justifyContent="space-between" marginTop={10}>
         <p style={{ fontWeight: 500 }}>
           {pointsEnum[pointEstimate !== undefined ? pointEstimate : 'ZERO']} pts
         </p>
@@ -56,7 +56,7 @@ export const TaskCard: NextPage<Props> = ({
         <DueDateCard dueDate={dueDate} />
       </Flex>
 
-      <Flex wrap={'wrap'} alignItems="center" mt={10} gap={10}>
+      <Flex wrap={'wrap'} alignItems="center" marginTop={10} gap={10}>
         {tags?.map((tag, id) => (
           <TagStyled key={id} tag={tag}>
             {tag.split('_').join(' ')}
@@ -64,7 +64,7 @@ export const TaskCard: NextPage<Props> = ({
         ))}
       </Flex>
 
-      <Flex alignItems="center" justifyContent="space-between" mt={10}>
+      <Flex alignItems="center" justifyContent="space-between" marginTop={10}>
         {creator ? (
           <UserAvatar
             userName={creator.fullName}

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { ThemeProperties } from '../../styles/theme.config';
 
 export interface ExtendedContentProps {
-  rounded?: number;
+  borderRadius?: number;
 }
 
 export const ContentStyled = styled(DialogContent)<ExtendedContentProps>`
@@ -12,5 +12,6 @@ export const ContentStyled = styled(DialogContent)<ExtendedContentProps>`
   background-color: ${({ theme }: { theme: ThemeProperties }) =>
     theme.accentBg};
   color: ${({ theme }: { theme: ThemeProperties }) => theme.mainText};
-  border-radius: ${(props) => (props.rounded ? props.rounded : '8px')};
+  border-radius: ${(props) =>
+    props.borderRadius ? props.borderRadius : '8px'};
 `;

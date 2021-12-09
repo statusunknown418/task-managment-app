@@ -3,7 +3,8 @@ import * as Dialog from '@radix-ui/react-dialog';
 import { BellIcon } from '@radix-ui/react-icons';
 import { ThemeProperties } from '../../styles/theme.config';
 import styled from 'styled-components';
-import { ContentStyled, TriggerStyled } from '../exports';
+import { ContentStyled } from './Content.styled';
+import { TriggerStyled } from './Trigger.styled';
 
 const PStyled = styled.p`
   color: ${({ theme }: { theme: ThemeProperties }) => theme.accentText};

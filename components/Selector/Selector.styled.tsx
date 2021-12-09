@@ -12,8 +12,6 @@ export const SelectorStyled = styled.div<SelectorProps>`
 
   color: ${({ theme }: { theme: ThemeProperties }) => theme.accentText};
   cursor: default;
-
-  // The red color will appear only when selected overriding the default one
   ${(props) =>
     props.currentRoute === props.routeName &&
     `color: ${props.theme.primaryClrRed};`}
@@ -21,7 +19,6 @@ export const SelectorStyled = styled.div<SelectorProps>`
   background: ${(props) =>
     props.currentRoute === props.routeName &&
     'linear-gradient(to right, rgba(0,0,0,0), rgba(210,77,77,0.1));'};
-
   transition: color 0.1s ease-in;
   display: flex;
   align-items: center;
@@ -29,11 +26,12 @@ export const SelectorStyled = styled.div<SelectorProps>`
   padding-block: 16px;
   padding-left: 19px;
   font-weight: 700;
+  position: relative;
+
   &:hover {
     color: ${(props) =>
       props.routeName !== props.currentRoute && props.theme.mainText};
   }
-  position: relative;
 
   &::after {
     content: '';
