@@ -1,12 +1,11 @@
-import TestRenderer from 'react-test-renderer';
-import { TaskCard } from '../components/exports';
-import { MockedProvider, MockedResponse } from '@apollo/client/testing';
+import { MockedProvider } from '@apollo/client/testing';
 import faker from 'faker';
+import TestRenderer from 'react-test-renderer';
+import { TaskCard } from '../components/TaskBoard/TaskCard';
 import {
   GetAllTasksByStatusDocument,
   PointEstimate,
   Status,
-  Task,
   TaskTag,
   UserType,
 } from '../__generated__/graphql-remastered';
