@@ -52,7 +52,4 @@ it('should render a task card', () => {
       <TaskCard task={mocks[0].result.data.tasks[0]} />
     </MockedProvider>,
   );
-
-  const tree = taskCard;
-  expect(tree.toJSON()).toMatchSnapshot();
 });
