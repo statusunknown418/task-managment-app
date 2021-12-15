@@ -10,7 +10,8 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@apollo/client": "^3.5.5",
@@ -44,6 +45,7 @@
     "eslint-config-next": "12.0.4",
     "eslint-plugin-testing-library": "^5.0.1",
     "faker": "^5.5.3",
+    "husky": "^7.0.4",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^27.4.3",
     "prettier": "^2.5.1",
