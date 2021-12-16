@@ -1,0 +1,11 @@
+overwrite: true
+schema: 'https://syn-api-prod.herokuapp.com/graphql'
+documents: graphql/**/*.gql
+generates:
+  __generated__/graphql-remastered.ts:
+    plugins:
+      - 'typescript'
+      - 'typescript-operations'
+      - 'typescript-react-apollo'
+    config:
+      useIndexSignature: true
