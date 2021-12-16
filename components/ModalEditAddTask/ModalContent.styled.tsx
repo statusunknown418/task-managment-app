@@ -16,7 +16,9 @@ const animateOnShow = keyframes`
   }
 `;
 
-export const ModalContentStyled = styled(DialogContent)<ExtendedModalContentProps>`
+export const ModalContentStyled = styled(
+  DialogContent,
+)<ExtendedModalContentProps>`
   position: fixed;
   top: 50%;
   left: 50%;

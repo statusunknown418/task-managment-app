@@ -8,9 +8,13 @@ export interface ExtendedDialogTriggerProps extends DialogTriggerProps {
   rounded?: number;
 }
 
-export const ModalTriggerStyled = styled(DialogTrigger)<ExtendedDialogTriggerProps>`
+export const ModalTriggerStyled = styled(
+  DialogTrigger,
+)<ExtendedDialogTriggerProps>`
   padding: ${({ padding: p }) => p}px;
   border-radius: ${({ rounded }) => rounded}px;
-  background-color: ${(props) => (props.backgroundColor ? props.backgroundColor : 'transparent')};
-  color: ${(props) => (props.triggerColor ? props.triggerColor : props.theme.mainText)};
+  background-color: ${(props) =>
+    props.backgroundColor ? props.backgroundColor : 'transparent'};
+  color: ${(props) =>
+    props.triggerColor ? props.triggerColor : props.theme.mainText};
 `;

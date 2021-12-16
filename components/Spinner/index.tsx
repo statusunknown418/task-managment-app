@@ -4,7 +4,14 @@ import { ThemeProperties } from '../../styles/theme.config';
 
 export const Spinner: NextPage<SpinnerProps> = ({ height, width }) => (
   <StyledSpinner viewBox="0 0 50 50" width={width} height={height}>
-    <circle className="path" cx="25" cy="25" r="10" fill="none" strokeWidth="2" />
+    <circle
+      className="path"
+      cx="25"
+      cy="25"
+      r="10"
+      fill="none"
+      strokeWidth="2"
+    />
   </StyledSpinner>
 );
 

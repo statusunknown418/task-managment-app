@@ -1,7 +1,10 @@
 import { useEffect } from 'react';
 import toast from 'react-hot-toast';
 
-export const useFixedToast = (type: 'error' | 'success' | 'loading', message: string) => {
+export const useFixedToast = (
+  type: 'error' | 'success' | 'loading',
+  message: string,
+) => {
   useEffect(() => {
     toast[type](message, {
       style: {
