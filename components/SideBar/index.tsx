@@ -1,14 +1,14 @@
-import { NextPage } from 'next';
-import Image from 'next/image';
 import {
   DashboardIcon,
   HamburgerMenuIcon,
   PersonIcon,
 } from '@radix-ui/react-icons';
+import { NextPage } from 'next';
 import { useRouter } from 'next/dist/client/router';
+import Image from 'next/image';
 import Link from 'next/link';
-import { SidebarStyled } from './Sidebar.styled';
 import { Selector } from '../Selector';
+import { SidebarStyled } from './Sidebar.styled';
 
 export const Sidebar: NextPage = () => {
   const router = useRouter();

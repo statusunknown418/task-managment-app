@@ -12,6 +12,7 @@ export const TagStyled = styled.div<TagProps>`
   padding-inline: 1rem;
   border-radius: 5px;
   font-weight: 500;
+
   ${(props) =>
     props.tag === 'REACT' &&
     `background-color: ${props.theme.quaternaryBgBlue};

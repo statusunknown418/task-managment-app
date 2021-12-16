@@ -14,4 +14,7 @@ export const ContentStyled = styled(DialogContent)<ExtendedContentProps>`
   color: ${({ theme }: { theme: ThemeProperties }) => theme.mainText};
   border-radius: ${(props) =>
     props.borderRadius ? props.borderRadius : '8px'};
+  position: absolute;
+  left: -300%;
+  padding: 10px;
 `;

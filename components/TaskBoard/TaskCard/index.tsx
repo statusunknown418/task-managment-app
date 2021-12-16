@@ -1,10 +1,10 @@
 import { DotsHorizontalIcon } from '@radix-ui/react-icons';
 import { NextPage } from 'next';
+import dynamic from 'next/dynamic';
 import { Task } from '../../../__generated__/graphql-remastered';
 import { Flex } from '../../Flex';
-import { DueDateCard } from '../DueDateCard';
-import dynamic from 'next/dynamic';
 import { spriteTypes, UserAvatar } from '../../UserAvatar';
+import { DueDateCard } from '../DueDateCard';
 import { TagStyled } from '../Tags';
 import { EditDeleteDropdownProps } from './EditDeleteMenu';
 

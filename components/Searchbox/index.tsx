@@ -1,5 +1,5 @@
-import { NextPage } from 'next';
 import { MagnifyingGlassIcon } from '@radix-ui/react-icons';
+import { NextPage } from 'next';
 import dynamic from 'next/dynamic';
 import { DialogMenuProps } from '../NotificationDialogMenu/index';
 import { IconStyled } from './IconSidebar.styled';

@@ -1,8 +1,8 @@
-import { NextPage } from 'next';
 import * as Dialog from '@radix-ui/react-dialog';
 import { BellIcon } from '@radix-ui/react-icons';
-import { ThemeProperties } from '../../styles/theme.config';
+import { NextPage } from 'next';
 import styled from 'styled-components';
+import { ThemeProperties } from '../../styles/theme.config';
 import { ContentStyled } from './Content.styled';
 import { TriggerStyled } from './Trigger.styled';
 

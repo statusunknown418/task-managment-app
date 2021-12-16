@@ -12,7 +12,6 @@ export const DueDateCard: NextPage<Props> = ({ dueDate }) => {
     .splice(1, 3)
     .join(' ');
 
-  // check if some date is yesterday
   const isYesterday = (someDate: Date) => {
     const today = new Date();
     const yesterday = new Date(today.getTime() - 24 * 60 * 60 * 1000);

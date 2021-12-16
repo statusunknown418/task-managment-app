@@ -1,13 +1,13 @@
 import * as Dropdown from '@radix-ui/react-dropdown-menu';
 import { Pencil1Icon, TrashIcon } from '@radix-ui/react-icons';
 import { NextPage } from 'next';
+import dynamic from 'next/dynamic';
 import toast from 'react-hot-toast';
 import styled from 'styled-components';
 import {
   GetAllTaskStatusDocument,
   useDeleteTaskByIdMutation,
 } from '../../../../__generated__/graphql-remastered';
-import dynamic from 'next/dynamic';
 import { Flex } from '../../../Flex';
 import { CustomModalProps } from '../../../ModalEditAddTask';
 

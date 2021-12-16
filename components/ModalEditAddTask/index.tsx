@@ -1,21 +1,20 @@
+import * as Dialog from '@radix-ui/react-dialog';
+import { ChevronDownIcon, ChevronUpIcon } from '@radix-ui/react-icons';
 import { NextPage } from 'next';
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
+import { ASSIGNEES } from '../../utils/SEED';
 import {
   GetAllTasksByStatusDocument,
   PointEstimate,
   Scalars,
   Status,
+  Task,
   TaskTag,
   useCreateTaskMutation,
   useUpdateTaskMutation,
-  Task,
 } from '../../__generated__/graphql-remastered';
-
-import { ChevronDownIcon, ChevronUpIcon } from '@radix-ui/react-icons';
-import { useForm } from 'react-hook-form';
-import toast from 'react-hot-toast';
-import * as Dialog from '@radix-ui/react-dialog';
-import { ASSIGNEES } from '../../utils/SEED';
-import { useState } from 'react';
 import { Flex } from '../Flex';
 import { SearchboxStyled } from '../Searchbox/Searchbox.styled';
 import { TagContainerStyled } from '../TaskBoard/Tags/TagContainer.styled';
@@ -89,7 +88,6 @@ export const ModalAddEditTask: NextPage<CustomModalProps> = ({
             {...register('taskName', { value: task.name })}
           />
         </Dialog.Title>
-
         <Flex gap={16} alignItems="center" justifyContent="space-between">
           <SelectStyled {...register('pointEstimate')}>
             <OptionStyled>Estimate</OptionStyled>
@@ -148,7 +146,6 @@ export const ModalAddEditTask: NextPage<CustomModalProps> = ({
 
           <DatePickerStyled type="date" {...register('dueDate')} />
         </Flex>
-
         <Flex gap={24} marginTop={16} alignItems="center">
           <ModalCloseStyled padding={8} onClick={() => setSelections([])}>
             Cancel

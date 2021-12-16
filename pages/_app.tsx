@@ -1,10 +1,10 @@
-import '../styles/globals.css';
+import { ApolloProvider } from '@apollo/client';
 import type { AppProps } from 'next/app';
 import { ThemeProvider } from 'styled-components';
-import { CustomGlobalStyles, customTheme } from '../styles/theme.config';
 import { Layout } from '../components/Layout';
-import { ApolloProvider } from '@apollo/client';
 import { apolloClient } from '../graphql/client';
+import '../styles/globals.css';
+import { CustomGlobalStyles, customTheme } from '../styles/theme.config';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (

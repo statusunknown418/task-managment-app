@@ -1,11 +1,11 @@
 import { useQuery } from '@apollo/client';
 import { NextPage } from 'next';
-import { Flex } from '../components/Flex';
-import { Spinner } from '../components/Spinner';
-import { getUser } from '../graphql/queries/getUser';
 import Image from 'next/image';
 import styled from 'styled-components';
+import { Flex } from '../components/Flex';
+import { Spinner } from '../components/Spinner';
 import { spriteTypes, UserAvatar } from '../components/UserAvatar';
+import { getUser } from '../graphql/queries/getUser';
 import { Query } from '../__generated__/graphql-remastered';
 
 export interface StyledSpanProps {
